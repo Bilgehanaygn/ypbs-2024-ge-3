@@ -1,20 +1,23 @@
 package yte.ypbs.ypbs_2024_ge3.customUser;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 
 import java.util.Collection;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomUser implements UserDetails{
+public class CustomUser extends BaseEntity implements UserDetails {
 
     private String username;
     private String password;
@@ -32,7 +35,7 @@ public class CustomUser implements UserDetails{
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public List<GrantedAuthority> getAuthorities() {
         return authorities;
     }
 
