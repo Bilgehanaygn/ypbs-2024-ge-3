@@ -25,10 +25,10 @@ public abstract class BaseEntity {
     private Long version;
 
     @CreatedDate
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime lastModifiedDate = LocalDateTime.now();
 
     @Override
     public boolean equals(Object obj) {
