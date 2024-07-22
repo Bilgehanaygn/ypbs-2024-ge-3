@@ -2,42 +2,66 @@ package user;
 
 
 import jakarta.persistence.*;
-import net.bytebuddy.asm.Advice;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import user.annotations.TCKimlikNo;
+
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
+
     @GeneratedValue
     @Id
     private Long id;
 
+    @NotBlank
     private String isim;
+    @NotBlank
     private String soyisim;
 
-    // Email annotation
+    @NotBlank
+    private String password;
+
+    @Email
+    @NotBlank
     private String email;
+
+    // Annotation'a gerek var mı? @Telefon
+    @NotBlank
     private String telefon;
+
+    // Annotation'a gerek var mı? @Plaka
     private String arac_plakasi;
 
+
     private String acil_durum_kisi;
+
     private String acil_durum_telefon;
+
     private String adres;
 
     private String akademik_unvan;
-    // Will add annotation for tckimlikno
+
+    @TCKimlikNo
     private long tcKimlikNo;
+
 
     @Enumerated(EnumType.STRING)
     private Cinsiyet cinsiyet;
 
-
-
     private LocalDate dogumTarihi;
 
+    @Enumerated(EnumType.STRING)
     private KanGrubu kanGrubu;
 
     @OneToMany
@@ -49,120 +73,36 @@ public class User {
     @OneToMany
     Set<Dosya> dosyalar = new HashSet<>();
 
+    public User(String isim, String soyisim, String password, String email, String telefon) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.email = email;
+        this.telefon = telefon;
+        this.password = password;
+    }
 
-    public void AddProject(Proje proje){
+    public void AddProje(Proje proje){
         dahilOlduguProjeler.add(proje);
     }
-
-    public Long getId() {
-        return id;
+    public void RemoveProje(Proje proje){
+        dahilOlduguProjeler.remove(proje);
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void addEgitim(Egitim egitim1){
+        egitim.add(egitim1);
     }
-
-    public String getIsim() {
-        return isim;
+    public void RemoveEgitim(Egitim egitim1){
+        egitim.remove(egitim1);
     }
-
-    public void setIsim(String isim) {
-        this.isim = isim;
+    public void addKatki(Katki katki){
+        katkilar.add(katki);
     }
-
-    public String getSoyisim() {
-        return soyisim;
+    public void removeKatki(Katki katki){
+        katkilar.remove(katki);
     }
-
-    public void setSoyisim(String soyisim) {
-        this.soyisim = soyisim;
+    public void addDosya(Dosya dosya){
+        dosyalar.add(dosya);
     }
-
-    public long getTcKimlikNo() {
-        return tcKimlikNo;
-    }
-
-    public void setTcKimlikNo(long tcKimlikNo) {
-        this.tcKimlikNo = tcKimlikNo;
-    }
-
-    public Cinsiyet getCinsiyet() {
-        return cinsiyet;
-    }
-
-    public void setCinsiyet(Cinsiyet cinsiyet) {
-        this.cinsiyet = cinsiyet;
-    }
-
-    public String getAkademik_unvan() {
-        return akademik_unvan;
-    }
-
-    public void setAkademik_unvan(String akademik_unvan) {
-        this.akademik_unvan = akademik_unvan;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDogumTarihi() {
-        return dogumTarihi;
-    }
-
-    public void setDogumTarihi(LocalDate dogumTarihi) {
-        this.dogumTarihi = dogumTarihi;
-    }
-
-    public KanGrubu getKanGrubu() {
-        return kanGrubu;
-    }
-
-    public void setKanGrubu(KanGrubu kanGrubu) {
-        this.kanGrubu = kanGrubu;
-    }
-
-    public String getTelefon() {
-        return telefon;
-    }
-
-    public void setTelefon(String telefon) {
-        this.telefon = telefon;
-    }
-
-    public String getArac_plakasi() {
-        return arac_plakasi;
-    }
-
-    public void setArac_plakasi(String arac_plakasi) {
-        this.arac_plakasi = arac_plakasi;
-    }
-
-    public String getAcil_durum_kisi() {
-        return acil_durum_kisi;
-    }
-
-    public void setAcil_durum_kisi(String acil_durum_kisi) {
-        this.acil_durum_kisi = acil_durum_kisi;
-    }
-
-    public String getAcil_durum_telefon() {
-        return acil_durum_telefon;
-    }
-
-    public void setAcil_durum_telefon(String acil_durum_telefon) {
-        this.acil_durum_telefon = acil_durum_telefon;
-    }
-
-    public String getAdres() {
-        return adres;
-    }
-
-    public void setAdres(String adres) {
-        this.adres = adres;
+    public void removeDosya(Dosya dosya){
+        dosyalar.remove(dosya);
     }
 }
