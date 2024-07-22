@@ -17,12 +17,6 @@ import yte.ypbs.ypbs_2024_ge3.customUser.CustomUserDetailService;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    public SecurityConfiguration(AuthenticationManagerBuilder authManagerBuilder, CustomUserDetailService customerUserDetailService) throws Exception {
-        authManagerBuilder.userDetailsService(customerUserDetailService).passwordEncoder(NoOpPasswordEncoder.getInstance()); //TODO: Password encode eklenecek
-
-    }
-
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
