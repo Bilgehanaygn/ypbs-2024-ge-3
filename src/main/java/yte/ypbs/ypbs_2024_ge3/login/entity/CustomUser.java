@@ -1,17 +1,13 @@
-package yte.ypbs.ypbs_2024_ge3.customUser;
+package yte.ypbs.ypbs_2024_ge3.login.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Fetch;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import yte.ypbs.ypbs_2024_ge3.Authority.Authority;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 @Entity
