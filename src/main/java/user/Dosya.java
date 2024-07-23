@@ -16,6 +16,10 @@ public class Dosya {
     @Id
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Enumerated(EnumType.STRING)
     private DosyaTuru dosyaTuru;
     private String dosyaAdi;

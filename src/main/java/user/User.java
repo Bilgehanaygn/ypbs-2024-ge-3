@@ -22,7 +22,7 @@ public class User {
 
     @GeneratedValue
     @Id
-    private Long id;
+    private Long userId;
 
     @NotBlank
     private String isim;
@@ -40,9 +40,15 @@ public class User {
     @NotBlank
     private String telefon;
 
+    @Enumerated(EnumType.STRING)
+    private Cinsiyet cinsiyet;
+
+    @TCKimlikNo
+    private long tcKimlikNo;
+
+    private String akademik_unvan;
     // Annotation'a gerek var mı? @Plaka
     private String arac_plakasi;
-
 
     private String acil_durum_kisi;
 
@@ -50,27 +56,22 @@ public class User {
 
     private String adres;
 
-    private String akademik_unvan;
-
-    @TCKimlikNo
-    private long tcKimlikNo;
-
-
-    @Enumerated(EnumType.STRING)
-    private Cinsiyet cinsiyet;
 
     private LocalDate dogumTarihi;
 
     @Enumerated(EnumType.STRING)
     private KanGrubu kanGrubu;
 
-    @OneToMany
+    @OneToOne
+    private Kurumsal kurumsal;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Proje> dahilOlduguProjeler = new HashSet<>();
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Egitim> egitim = new HashSet<>();
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Katki> katkilar = new HashSet<>();
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Dosya> dosyalar = new HashSet<>();
 
     public User(String isim, String soyisim, String password, String email, String telefon) {

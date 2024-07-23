@@ -17,6 +17,10 @@ public class Egitim {
     @Id
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Enumerated(EnumType.STRING)
     @NotBlank
     private EgitimTuru egitimTuru;
