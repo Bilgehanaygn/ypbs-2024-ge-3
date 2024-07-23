@@ -7,7 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import user.annotations.Plaka;
 import user.annotations.TCKimlikNo;
+import user.annotations.Telefon;
 
 
 import java.time.LocalDate;
@@ -38,6 +40,7 @@ public class User {
 
     // Annotation'a gerek var mı? @Telefon
     @NotBlank
+    @Telefon
     private String telefon;
 
     @Enumerated(EnumType.STRING)
@@ -47,15 +50,16 @@ public class User {
     private long tcKimlikNo;
 
     private String akademik_unvan;
-    // Annotation'a gerek var mı? @Plaka
+
+    @Plaka
     private String arac_plakasi;
 
     private String acil_durum_kisi;
 
+    @Telefon
     private String acil_durum_telefon;
 
     private String adres;
-
 
     private LocalDate dogumTarihi;
 
