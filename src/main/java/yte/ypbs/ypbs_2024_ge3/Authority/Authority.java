@@ -2,11 +2,8 @@ package yte.ypbs.ypbs_2024_ge3.Authority;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
 import lombok.*;
-import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
-
-import java.util.List;
+import yte.ypbs.ypbs_2024_ge3.Common.BaseEntity;
 
 @Entity
 @Data
