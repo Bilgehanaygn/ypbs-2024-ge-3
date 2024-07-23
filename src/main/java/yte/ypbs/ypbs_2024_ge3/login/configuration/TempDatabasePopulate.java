@@ -19,9 +19,8 @@ public class TempDatabasePopulate {
 
     @PostConstruct
     public void populate() {
-        CustomUser user = new CustomUser("user1", passwordEncoder.encode("123"), List.of(new Authority("ROLE_USER")));
-        CustomUser admin = new CustomUser("admin2", passwordEncoder.encode("123"), List.of(new Authority("ROLE_ADMIN")));
+        CustomUser user = new CustomUser("user", passwordEncoder.encode("123"), List.of(new Authority("ROLE_USER")));
+        CustomUser admin = new CustomUser("admin", passwordEncoder.encode("123"), List.of(new Authority("ROLE_ADMIN")));
         customUserRepository.saveAll(List.of(user, admin));
     }
-
 }
