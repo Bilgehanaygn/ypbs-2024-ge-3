@@ -1,4 +1,7 @@
-package yte.ypbs.ypbs_2024_ge3.user;
+/*
+ Bu class User entity gelene kadar kullanılacak bir class. User entity oluşturulduktan sonra bu class silinecek.
+ */
+package yte.ypbs.ypbs_2024_ge3.user.Entity;
 
 
 import jakarta.persistence.*;
@@ -7,27 +10,39 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 import yte.ypbs.ypbs_2024_ge3.user.annotations.Plaka;
 import yte.ypbs.ypbs_2024_ge3.user.annotations.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotations.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
 
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "_user")
-public class User {
+public class User extends BaseEntity {
 
-    @GeneratedValue
-    @Id
-    private Long id;
+
+    @Lob
+    @Column(name = "image", columnDefinition="BLOB")
+    private byte[] image;
+
+    public User(String isim, String soyisim, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.password = password;
+        this.email = email;
+        this.telefon = telefon;
+        this.dogumTarihi = dogumTarihi;
+        this.image = image;
+    }
 
     @NotBlank
     private String isim;
@@ -125,4 +140,6 @@ public class User {
     public void removeDosya(Dosya dosya){
         dosyalar.remove(dosya);
     }
+
+
 }

@@ -1,6 +1,6 @@
-package yte.ypbs.ypbs_2024_ge3.User.Controller;
+package yte.ypbs.ypbs_2024_ge3.user.Controller;
 
-import yte.ypbs.ypbs_2024_ge3.User.Entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
 
 import java.time.LocalDate;
 
@@ -12,9 +12,9 @@ public record UserResponse(
 ) {
     public static UserResponse fromEntity(User user) {
         return new UserResponse(
-                user.getName(),
-                user.getSurname(),
-                user.getBirthDate(),
+                user.getIsim(),
+                user.getSoyisim(),
+                user.getDogumTarihi(),
                 user.getImage()
         );
     }

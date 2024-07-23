@@ -1,7 +1,7 @@
-package yte.ypbs.ypbs_2024_ge3.user.repositories;
+package yte.ypbs.ypbs_2024_ge3.user.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import yte.ypbs.ypbs_2024_ge3.user.Dosya;
+import yte.ypbs.ypbs_2024_ge3.user.Entity.Dosya;
 
 public interface DosyaRepository extends JpaRepository<Dosya, Long> {
 }
