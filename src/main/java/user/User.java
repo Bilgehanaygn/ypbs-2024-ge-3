@@ -50,15 +50,15 @@ public class User {
     @TCKimlikNo
     private long tcKimlikNo;
 
-    private String akademik_unvan;
+    private String akademikUnvan;
 
     @Plaka
-    private String arac_plakasi;
+    private String aracPlakasi;
 
-    private String acil_durum_kisi;
+    private String acilDurumKisi;
 
     @Telefon
-    private String acil_durum_telefon;
+    private String acilDurumTelefon;
 
     private String adres;
 
