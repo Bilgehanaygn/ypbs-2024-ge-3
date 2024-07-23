@@ -10,6 +10,8 @@ import lombok.Setter;
 import user.annotations.Plaka;
 import user.annotations.TCKimlikNo;
 import user.annotations.Telefon;
+import user.enums.Cinsiyet;
+import user.enums.KanGrubu;
 
 
 import java.time.LocalDate;
@@ -74,9 +76,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Egitim> egitim = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<Deneyim> deneyimler = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Katki> katkilar = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Dosya> dosyalar = new HashSet<>();
+
 
     public User(String isim, String soyisim, String password, String email, String telefon) {
         this.isim = isim;
@@ -94,6 +99,12 @@ public class User {
     }
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);
+    }
+    public void addDeneyim(Deneyim deneyim){
+        deneyimler.add(deneyim);
+    }
+    public void removeDeneyim(Deneyim deneyim){
+        deneyimler.remove(deneyim);
     }
     public void RemoveEgitim(Egitim egitim1){
         egitim.remove(egitim1);

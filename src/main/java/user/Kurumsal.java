@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import user.enums.CalismaDurumu;
+import user.enums.CalismaTuru;
+import user.enums.PersonelTuru;
 
 import java.time.LocalDate;
 

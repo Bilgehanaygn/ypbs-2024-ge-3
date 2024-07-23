@@ -1,4 +1,4 @@
-package user;
+package user.enums;
 
 public enum PersonelTuru {
     YONETICI,

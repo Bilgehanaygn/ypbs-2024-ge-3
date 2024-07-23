@@ -1,4 +1,4 @@
-package user;
+package user.enums;
 
 public enum KanGrubu {
     A_POZITIF("A+"),
