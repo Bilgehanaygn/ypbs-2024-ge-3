@@ -25,7 +25,7 @@ public class Kurumsal {
 
     private LocalDate iseGirisTarihi;
     private long sicilNo;
-    private String kadro; // Enum da olabilir emin degilim
+    private String kadro;
     private String unvan;
     private String birim;
     private String proje;
@@ -35,7 +35,7 @@ public class Kurumsal {
     private PersonelTuru personelTuru;
     private CalismaTuru calismaTuru;
     private CalismaDurumu calismaDurumu;
-    private boolean servisKullanimi; // Emin degilim
+    private boolean servisKullanimi;
     private String dahiliNumara;
     private Integer odaNumara;
 

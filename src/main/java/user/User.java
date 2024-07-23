@@ -40,7 +40,6 @@ public class User {
     @NotBlank
     private String email;
 
-    // Annotation'a gerek var mı? @Telefon
     @NotBlank
     @Telefon
     private String telefon;

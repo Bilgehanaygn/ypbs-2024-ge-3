@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 import user.enums.CalismaSekli;
 
 import java.time.LocalDate;
@@ -23,7 +22,8 @@ public class Deneyim {
     private String pozisyon;
     private CalismaSekli calismaSekli;
     private LocalDate baslamaTarihi;
-    private LocalDate bitisTarihi; // hala sürüyorsa?
+    @Column(nullable = true)
+    private LocalDate bitisTarihi;
     private String istenAyrilmaNedeni;
 
     @ManyToOne
@@ -37,5 +37,6 @@ public class Deneyim {
         this.pozisyon = pozisyon;
         this.baslamaTarihi = baslamaTarihi;
         this.bitisTarihi = bitisTarihi;
+
     }
 }

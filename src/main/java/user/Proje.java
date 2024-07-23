@@ -31,8 +31,8 @@ public class Proje {
     private String gorev;
     @NotBlank
     private LocalDate baslangicTarihi;
-
-    private LocalDate bitisTarihi; // Devam ediyorsa?
+    @Column(nullable = true)
+    private LocalDate bitisTarihi;
 
     public Proje(String projeAdi, String takim, String gorev, LocalDate baslangicTarihi) {
         this.projeAdi = projeAdi;
