@@ -1,26 +1,18 @@
 package yte.ypbs.ypbs_2024_ge3.Organization;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "organization")
-public class Organization extends BaseEntity {
+@Table(name="_user")
+public class User extends BaseEntity {
     private String name;
 
-
     @ManyToOne
-    private Organization top;
-
+    @JoinColumn(name="organization_id")
+    private Organization organization;
 }
-
