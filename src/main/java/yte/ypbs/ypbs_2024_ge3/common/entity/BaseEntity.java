@@ -1,4 +1,4 @@
-package yte.ypbs.ypbs_2024_ge3.Common;
+package yte.ypbs.ypbs_2024_ge3.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

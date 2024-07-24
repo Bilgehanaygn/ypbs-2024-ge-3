@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import yte.ypbs.ypbs_2024_ge3.Common.BaseEntity;
+import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 
 @Entity
 @Getter
