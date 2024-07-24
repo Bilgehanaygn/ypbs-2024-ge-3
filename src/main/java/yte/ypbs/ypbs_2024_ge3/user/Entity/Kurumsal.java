@@ -47,4 +47,12 @@ public class Kurumsal {
         this.unvan = unvan;
         this.birim = birim;
     }
+
+    public Kurumsal(User user, String gorev, String unvan, String birim, String proje) {
+        this.user = user;
+        this.gorev = gorev;
+        this.unvan = unvan;
+        this.birim = birim;
+        this.proje = proje;
+    }
 }

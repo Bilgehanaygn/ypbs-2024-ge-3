@@ -18,12 +18,17 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/born-today")
-    public List<UserResponse> getAllBornToday() {
+    public List<UserBornTodayResponse> getAllBornToday() {
         return userService.getAllBornToday();
     }
 
+    @GetMapping("/get-users-with-filters")
+    public List<UserDataGridResponse> getUsersWithFilters(String nameSurname, String unvan, String gorev, String birim, String proje, String katki, String takim) {
+        return userService.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
+    }
+
     @PostMapping("/create-user")
-    public User createUser(String name, String surname, String birthDate, MultipartFile imageFile) {
+    public User createUser(String name, String surname, String password, String email, String telefon, String birthDate, MultipartFile imageFile) {
         byte[] image = null;
         try {
             image = imageFile.getBytes();
@@ -31,6 +36,8 @@ public class UserController {
             throw new RuntimeException("Could not read image file");
         }
 
-        return userService.createUser(name, surname, birthDate, image);
+        return userService.createUser(name, surname, password, email, telefon, birthDate, image);
     }
+
+
 }

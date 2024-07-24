@@ -1,16 +1,21 @@
-
+/*
+ Bu class User entity gelene kadar kullanılacak bir class. User entity oluşturulduktan sonra bu class silinecek.
+ */
 package yte.ypbs.ypbs_2024_ge3.user.Entity;
 
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
-import yte.ypbs.ypbs_2024_ge3.user.Enums.Cinsiyet;
+import yte.ypbs.ypbs_2024_ge3.user.annotations.Plaka;
+import yte.ypbs.ypbs_2024_ge3.user.annotations.TCKimlikNo;
+import yte.ypbs.ypbs_2024_ge3.user.annotations.Telefon;
+import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
+import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -21,13 +26,23 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "_user")
 public class User extends BaseEntity {
+
 
     @Lob
     @Column(name = "image", columnDefinition="BLOB")
     private byte[] image;
+
+    public User(String isim, String soyisim, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.password = password;
+        this.email = email;
+        this.telefon = telefon;
+        this.dogumTarihi = dogumTarihi;
+        this.image = image;
+    }
 
     @NotBlank
     private String isim;
@@ -42,23 +57,23 @@ public class User extends BaseEntity {
     private String email;
 
     @NotBlank
-    @yte.ypbs.ypbs_2024_ge3.user.Annotations.Telefon
+    @Telefon
     private String telefon;
 
     @Enumerated(EnumType.STRING)
     private Cinsiyet cinsiyet;
 
-    @yte.ypbs.ypbs_2024_ge3.user.Annotations.TCKimlikNo
+    @TCKimlikNo
     private long tcKimlikNo;
 
     private String akademikUnvan;
 
-    @yte.ypbs.ypbs_2024_ge3.user.Annotations.Plaka
+    @Plaka
     private String aracPlakasi;
 
     private String acilDurumKisi;
 
-    @yte.ypbs.ypbs_2024_ge3.user.Annotations.Telefon
+    @Telefon
     private String acilDurumTelefon;
 
     private String adres;
@@ -66,7 +81,7 @@ public class User extends BaseEntity {
     private LocalDate dogumTarihi;
 
     @Enumerated(EnumType.STRING)
-    private yte.ypbs.ypbs_2024_ge3.user.Enums.KanGrubu kanGrubu;
+    private KanGrubu kanGrubu;
 
     @JoinTable(name="user_egitim",
             joinColumns = @JoinColumn(name="user_id"),
@@ -101,12 +116,6 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public User(String isim, String soyisim, LocalDate dogumTarihi){
-        this.isim = isim;
-        this.soyisim = soyisim;
-        this.dogumTarihi = dogumTarihi;
-    }
-
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);
     }
@@ -131,4 +140,6 @@ public class User extends BaseEntity {
     public void removeDosya(Dosya dosya){
         dosyalar.remove(dosya);
     }
+
+
 }
