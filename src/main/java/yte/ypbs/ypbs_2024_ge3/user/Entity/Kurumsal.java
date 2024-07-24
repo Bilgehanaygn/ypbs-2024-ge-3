@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import yte.ypbs.ypbs_2024_ge3.user.Enums.CalismaDurumu;
-import yte.ypbs.ypbs_2024_ge3.user.Enums.CalismaTuru;
-import yte.ypbs.ypbs_2024_ge3.user.Enums.PersonelTuru;
+import yte.ypbs.ypbs_2024_ge3.user.enums.CalismaDurumu;
+import yte.ypbs.ypbs_2024_ge3.user.enums.CalismaTuru;
+import yte.ypbs.ypbs_2024_ge3.user.enums.PersonelTuru;
 
 import java.time.LocalDate;
 

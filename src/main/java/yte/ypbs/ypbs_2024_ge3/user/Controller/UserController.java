@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/get-users-with-filters")
-    public List<UserDataGridResponse> getUsersWithFilters(String nameSurname, String unvan, String gorev, String birim, String proje, String katki, String takim) {
+    public List<UserDataGridResponse> getUsersWithFilters(String nameSurname, String unvan, String gorev, String birim, String proje) {
         return userService.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
     }
 

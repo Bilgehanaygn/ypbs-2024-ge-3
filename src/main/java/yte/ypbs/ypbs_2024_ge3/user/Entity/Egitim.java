@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import yte.ypbs.ypbs_2024_ge3.user.Enums.EgitimTuru;
+import yte.ypbs.ypbs_2024_ge3.user.enums.EgitimTuru;
 
 import java.time.LocalDate;
 

@@ -13,6 +13,11 @@ public interface UserRepository extends JpaRepository<User, Long>{
     @Query("SELECT u FROM User u WHERE MONTH(u.dogumTarihi) = :month AND DAY(u.dogumTarihi) = :day")
     List<User> findByBirthdayMonthAndDay(@Param("month") int month, @Param("day") int day);
 
+
+    /*
+    * Bu case sensitive şu anda. Düzeltilmeli.
+    * Katkı ve Takım araması yapmıyor. Düzeltilmeli.
+     */
     @Query(value = "SELECT concat(u.isim, ' ', u.soyisim) as nameSurname, k.unvan as unvan, k.gorev as gorev, k.birim as birim, k.proje as proje, u.email as email, u.telefon as telefon " +
             "FROM User u JOIN Kurumsal k ON k.user = u " +
             "WHERE CONCAT(u.isim, ' ', u.soyisim) LIKE %:name_surname% " +

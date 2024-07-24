@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import yte.ypbs.ypbs_2024_ge3.user.Enums.DosyaTuru;
+import yte.ypbs.ypbs_2024_ge3.user.enums.DosyaTuru;
 
 import java.time.LocalDate;
 

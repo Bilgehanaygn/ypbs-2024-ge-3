@@ -1,4 +1,4 @@
-package yte.ypbs.ypbs_2024_ge3.user.Enums;
+package yte.ypbs.ypbs_2024_ge3.user.enums;
 
 public enum EgitimTuru {
     ILKOKUL,
