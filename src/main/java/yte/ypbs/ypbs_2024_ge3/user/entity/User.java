@@ -1,35 +1,43 @@
-package yte.ypbs.ypbs_2024_ge3.user;
+package yte.ypbs.ypbs_2024_ge3.user.entity;
 
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import yte.ypbs.ypbs_2024_ge3.Common.BaseEntity;
-import yte.ypbs.ypbs_2024_ge3.user.annotations.Plaka;
-import yte.ypbs.ypbs_2024_ge3.user.annotations.TCKimlikNo;
-import yte.ypbs.ypbs_2024_ge3.user.annotations.Telefon;
+import org.springframework.security.core.userdetails.UserDetails;
+import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
+import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
+import yte.ypbs.ypbs_2024_ge3.user.annotation.Plaka;
+import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
+import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
 
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "_user")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
     @NotBlank
     private String isim;
     @NotBlank
     private String soyisim;
+
+    @NotBlank
+    private String username;
 
     @NotBlank
     private String password;
@@ -65,6 +73,19 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private KanGrubu kanGrubu;
 
+    private boolean accountNonExpired =true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id")
+    )
+    private List<Authority> authorities;
+
+
     @JoinTable(name="user_egitim",
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="egitim_id"))
@@ -90,13 +111,53 @@ public class User extends BaseEntity {
     Set<Dosya> dosyalar = new HashSet<>();
 
 
-    public User(String isim, String soyisim, String password, String email, String telefon) {
+    public User(String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
         this.soyisim = soyisim;
-        this.email = email;
-        this.telefon = telefon;
+        this.username = username;
         this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+        this.telefon = telefon;
     }
+
+
+    @Override
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+
 
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);
