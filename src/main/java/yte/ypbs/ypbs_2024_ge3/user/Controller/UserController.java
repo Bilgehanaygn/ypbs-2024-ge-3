@@ -18,8 +18,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/born-today")
-    public List<UserResponse> getAllBornToday() {
+    public List<UserBornTodayResponse> getAllBornToday() {
         return userService.getAllBornToday();
+    }
+
+    @GetMapping("/get-users-with-filters")
+    public List<UserDataGridResponse> getUsersWithFilters(String nameSurname, String unvan, String gorev, String birim, String proje, String katki, String takim) {
+        return userService.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
     }
 
     @PostMapping("/create-user")
@@ -33,4 +38,6 @@ public class UserController {
 
         return userService.createUser(name, surname, password, email, telefon, birthDate, image);
     }
+
+
 }

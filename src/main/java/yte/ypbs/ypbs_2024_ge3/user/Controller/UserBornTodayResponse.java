@@ -4,14 +4,14 @@ import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
 
 import java.time.LocalDate;
 
-public record UserResponse(
+public record UserBornTodayResponse(
         String name,
         String surname,
         LocalDate birthDate,
         byte[] image
 ) {
-    public static UserResponse fromEntity(User user) {
-        return new UserResponse(
+    public static UserBornTodayResponse fromEntity(User user) {
+        return new UserBornTodayResponse(
                 user.getIsim(),
                 user.getSoyisim(),
                 user.getDogumTarihi(),
