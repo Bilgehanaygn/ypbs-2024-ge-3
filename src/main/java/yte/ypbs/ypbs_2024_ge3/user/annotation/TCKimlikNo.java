@@ -1,4 +1,4 @@
-package yte.ypbs.ypbs_2024_ge3.user.annotations;
+package yte.ypbs.ypbs_2024_ge3.user.annotation;
 
 import jakarta.validation.Payload;
 

@@ -1,9 +1,10 @@
-package yte.ypbs.ypbs_2024_ge3.user;
+package yte.ypbs.ypbs_2024_ge3.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 import yte.ypbs.ypbs_2024_ge3.user.enums.CalismaDurumu;
 import yte.ypbs.ypbs_2024_ge3.user.enums.CalismaTuru;
 import yte.ypbs.ypbs_2024_ge3.user.enums.PersonelTuru;
@@ -14,11 +15,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Kurumsal {
-
-    @GeneratedValue
-    @Id
-    private Long id;
+public class Kurumsal extends BaseEntity {
 
     @OneToOne
     private User user;
