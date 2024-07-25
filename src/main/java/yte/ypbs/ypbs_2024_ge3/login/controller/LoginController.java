@@ -17,10 +17,6 @@ public class LoginController {
         this.authenticationService = authenticationService;
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "Login Sayfası";
-    }
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest loginRequest){
