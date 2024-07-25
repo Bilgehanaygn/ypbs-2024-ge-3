@@ -11,10 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.DelegatingSecurityContextRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
+import yte.ypbs.ypbs_2024_ge3.login.configuration.filter.CustomAuthFilter;
 import yte.ypbs.ypbs_2024_ge3.login.service.CustomAuthenticationProvider;
 
 
@@ -23,7 +25,7 @@ import yte.ypbs.ypbs_2024_ge3.login.service.CustomAuthenticationProvider;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    public SecurityFilterChain configure(HttpSecurity http, CustomAuthFilter customAuthFilter) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
@@ -33,6 +35,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                .addFilterBefore(customAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
@@ -45,4 +48,6 @@ public class SecurityConfiguration {
     public SecurityContextRepository securityContextRepository() {
         return new DelegatingSecurityContextRepository(new RequestAttributeSecurityContextRepository(), new HttpSessionSecurityContextRepository());
     }
+
+
 }
