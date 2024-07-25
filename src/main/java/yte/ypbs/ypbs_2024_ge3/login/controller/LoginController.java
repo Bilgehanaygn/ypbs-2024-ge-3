@@ -7,7 +7,7 @@ import yte.ypbs.ypbs_2024_ge3.login.request.LoginRequest;
 import yte.ypbs.ypbs_2024_ge3.login.service.AuthenticationService;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class LoginController {
 
     private AuthenticationService authenticationService;
