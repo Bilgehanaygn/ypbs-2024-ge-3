@@ -111,7 +111,7 @@ public class User extends BaseEntity implements UserDetails {
     Set<Dosya> dosyalar = new HashSet<>();
 
 
-    public User(String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
+    public User(Set<Egitim> egitim, String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
         this.soyisim = soyisim;
         this.username = username;
@@ -119,6 +119,7 @@ public class User extends BaseEntity implements UserDetails {
         this.email = email;
         this.authorities = authorities;
         this.telefon = telefon;
+        this.egitim = egitim;
     }
 
 
