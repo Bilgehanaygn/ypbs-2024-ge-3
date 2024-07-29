@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import yte.ypbs.ypbs_2024_ge3.user.response.UserResponse;
 import yte.ypbs.ypbs_2024_ge3.user.service.UserService;
 
-@RestController
+@RestController("/api")
 public class UserContoller {
 
     private UserService userService;

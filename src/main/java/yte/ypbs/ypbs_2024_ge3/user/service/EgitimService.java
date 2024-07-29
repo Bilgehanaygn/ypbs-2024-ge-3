@@ -21,4 +21,13 @@ public class EgitimService {
 
         return egitimSet;
     }
+
+    public Set<Egitim> getUserEgitim(String username) {
+
+        User user = userService.getUser(username);
+        Set<Egitim> egitimSet = user.getEgitim();
+
+        return egitimSet;
+    }
+
 }

@@ -22,4 +22,10 @@ public class UserService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return user;
     }
+
+    public User getUser(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        return user;
+    }
+
 }
