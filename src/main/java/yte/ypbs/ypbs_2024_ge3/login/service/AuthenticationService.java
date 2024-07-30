@@ -1,15 +1,21 @@
 package yte.ypbs.ypbs_2024_ge3.login.service;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.security.AuthProvider;
 
 @Service
 public class AuthenticationService {
@@ -31,14 +37,24 @@ public class AuthenticationService {
             securityContext.setAuthentication(authenticatedAuthentication);
             SecurityContextHolder.setContext(securityContext);
             saveContext();
-            return "Authentication Successful";
+            return "Auth Successful";
         }
         return "Authentication Failed";
     }
 
     public void logout() {
-        SecurityContextHolder.clearContext();
-        saveContext();
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        logoutHandler.logout(attr.getRequest(), attr.getResponse(), authentication);
+
+        HttpServletRequest request = attr.getRequest();
+        HttpServletResponse response = attr.getResponse();
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setPath(request.getContextPath() + "/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 
     private void saveContext() {
@@ -48,6 +64,4 @@ public class AuthenticationService {
             securityContextRepository.saveContext(SecurityContextHolder.getContext(), requestAttributes, responseAttributes);
         }
     }
-
-
 }
