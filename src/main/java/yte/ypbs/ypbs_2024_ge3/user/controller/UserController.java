@@ -18,6 +18,6 @@ public class UserController {
 
     @GetMapping("/userHeader")
     public UserHeaderResponse getUser() {
-        return userService.findByUsername().toUserHeaderResponse();
+        return userService.findByUsername();
     }
 }

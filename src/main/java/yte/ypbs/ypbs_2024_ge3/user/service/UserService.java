@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
+import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
 @Service
 public class UserService {
@@ -15,10 +16,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByUsername() {
+    public UserHeaderResponse findByUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getPrincipal() == null || authentication.getPrincipal().equals("anonymousUser")) return null;
         String username = authentication.getName();
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
-        return user;
+        return user.toUserHeaderResponse();
     }
 }
