@@ -7,7 +7,7 @@ import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 import yte.ypbs.ypbs_2024_ge3.user.service.UserService;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/user")
 public class UserController {
 
     private UserService userService;
