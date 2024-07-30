@@ -16,6 +16,7 @@ import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
+import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
 
 import java.time.LocalDate;
@@ -69,6 +70,8 @@ public class User extends BaseEntity implements UserDetails {
     private String adres;
 
     private LocalDate dogumTarihi;
+
+    private byte[] photo;
 
     @Enumerated(EnumType.STRING)
     private KanGrubu kanGrubu;
@@ -183,5 +186,11 @@ public class User extends BaseEntity implements UserDetails {
     }
     public void removeDosya(Dosya dosya){
         dosyalar.remove(dosya);
+    }
+
+
+
+    public UserHeaderResponse toUserHeaderResponse(){
+        return new UserHeaderResponse(isim, soyisim, photo);
     }
 }
