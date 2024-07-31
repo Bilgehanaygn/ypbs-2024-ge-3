@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.service.UserService;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,8 @@ public class UserController {
 
     @GetMapping("/get-users-with-filters")
     public List<UserDataGridResponse> getUsersWithFilters(String nameSurname, String unvan, String gorev, String birim, String proje) {
-        return userService.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
+//        return userService.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
+    return Collections.emptyList();
     }
 
     @PostMapping("/create-user")

@@ -21,19 +21,19 @@ public interface UserRepository extends JpaRepository<User, Long>{
     * Bu case sensitive şu anda. Düzeltilmeli.
     * Katkı ve Takım araması yapmıyor. Düzeltilmeli.
      */
-    @Query(value = "SELECT concat(u.isim, ' ', u.soyisim) as nameSurname, k.unvan as unvan, k.gorev as gorev, k.birim as birim, k.proje as proje, u.email as email, u.telefon as telefon " +
-            "FROM User u JOIN Kurumsal k ON k.user = u " +
-            "WHERE CONCAT(u.isim, ' ', u.soyisim) LIKE %:name_surname% " +
-            "AND k.unvan LIKE %:unvan% " +
-            "AND k.gorev LIKE %:gorev% " +
-            "AND k.birim LIKE %:birim% " +
-            "AND k.proje LIKE %:proje%"
-    )
-    List<Map<String, Object>> searchUsersWithFilters(@Param("name_surname") String nameSurname,
-                                               @Param("unvan") String unvan,
-                                               @Param("gorev") String gorev,
-                                               @Param("birim") String birim,
-                                               @Param("proje") String proje);
+//    @Query(value = "SELECT concat(u.isim, ' ', u.soyisim) as nameSurname, k.unvan as unvan, k.gorev as gorev, k.birim as birim, k.proje as proje, u.email as email, u.telefon as telefon " +
+//            "FROM User u JOIN Kurumsal k ON k.user = u " +
+//            "WHERE CONCAT(u.isim, ' ', u.soyisim) LIKE %:name_surname% " +
+//            "AND k.unvan LIKE %:unvan% " +
+//            "AND k.gorev LIKE %:gorev% " +
+//            "AND k.birim LIKE %:birim% " +
+//            "AND k.proje LIKE %:proje%"
+//    )
+//    List<Map<String, Object>> searchUsersWithFilters(@Param("name_surname") String nameSurname,
+//                                               @Param("unvan") String unvan,
+//                                               @Param("gorev") String gorev,
+//                                               @Param("birim") String birim,
+//                                               @Param("proje") String proje);
 
 
 }

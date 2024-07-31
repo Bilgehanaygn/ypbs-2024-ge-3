@@ -33,28 +33,28 @@ public class UserService {
         return userBornTodayResponses;
     }
 
-    public List<UserDataGridResponse> searchUsersWithFilters(String nameSurname,
-                                                             String unvan,
-                                                             String gorev,
-                                                             String birim,
-                                                             String proje) {
-        List<Map<String, Object>> queryResult = userRepository.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
-        List<UserDataGridResponse> result = new ArrayList<>();
-
-        for (Map<String, Object> row : queryResult) {
-            UserDataGridResponse userDataGridResponse = new UserDataGridResponse(
-                    (String) row.get("nameSurname"),
-                    (String) row.get("unvan"),
-                    (String) row.get("gorev"),
-                    (String) row.get("birim"),
-                    (String) row.get("proje"),
-                    (String) row.get("email"),
-                    (String) row.get("telefon")
-            );
-            result.add(userDataGridResponse);
-        }
-        return result;
-    }
+//    public List<UserDataGridResponse> searchUsersWithFilters(String nameSurname,
+//                                                             String unvan,
+//                                                             String gorev,
+//                                                             String birim,
+//                                                             String proje) {
+//        List<Map<String, Object>> queryResult = userRepository.searchUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
+//        List<UserDataGridResponse> result = new ArrayList<>();
+//
+//        for (Map<String, Object> row : queryResult) {
+//            UserDataGridResponse userDataGridResponse = new UserDataGridResponse(
+//                    (String) row.get("nameSurname"),
+//                    (String) row.get("unvan"),
+//                    (String) row.get("gorev"),
+//                    (String) row.get("birim"),
+//                    (String) row.get("proje"),
+//                    (String) row.get("email"),
+//                    (String) row.get("telefon")
+//            );
+//            result.add(userDataGridResponse);
+//        }
+//        return result;
+//    }
 
     public User createUser(String name, String surname, String password, String email, String telefon, String birthDate, byte[] image) {
         LocalDate birthDateParsed = LocalDate.parse(birthDate);
