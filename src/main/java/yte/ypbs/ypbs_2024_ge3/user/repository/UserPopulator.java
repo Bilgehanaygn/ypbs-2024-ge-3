@@ -43,15 +43,15 @@ public class UserPopulator {
         userRepository.save(user9);
         userRepository.save(user10);
 
-        kurumsalRepository.save(new Kurumsal(user1, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user2, "İş Analisti", "Yazılımcı", "Donanım ", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user3, "İş Analisti", "Uzman Araştırmacı", "Yazılım Geliştirme", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user4, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user5, "İş Analisti", "Uzman Araştırmacı", "Yazılım Geliştirme", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user6, "İş Analisti", "Uzman Yazılımcı", "Donanım", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user7, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user8, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user9, "İş Analisti", "Uzman Araştırmacı", "Donanım", "YPBS"));
-        kurumsalRepository.save(new Kurumsal(user10, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user1, LocalDate.now(), 2L, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user2, LocalDate.now(), 2L, "İş Analisti", "Yazılımcı", "Donanım ", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user3, LocalDate.now(), 2L, "İş Analisti", "Uzman Araştırmacı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user4, LocalDate.now(), 2L, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user5, LocalDate.now(), 2L, "İş Analisti", "Uzman Araştırmacı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user6, LocalDate.now(), 2L, "İş Analisti", "Uzman Yazılımcı", "Donanım", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user7, LocalDate.now(), 2L, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user8, LocalDate.now(), 2L, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user9, LocalDate.now(), 2L, "İş Analisti", "Uzman Araştırmacı", "Donanım", "YPBS"));
+//        kurumsalRepository.save(new Kurumsal(user10, LocalDate.now(), 2L, "İş Analisti", "Uzman Yazılımcı", "Yazılım Geliştirme", "YPBS"));
     }
 }

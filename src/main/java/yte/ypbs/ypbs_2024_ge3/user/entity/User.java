@@ -31,8 +31,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "_user")
 public class User extends BaseEntity implements UserDetails {
-public class User extends BaseEntity {
-
 
     @Lob
     @Column(name = "image", columnDefinition="BLOB")
@@ -175,35 +173,6 @@ public class User extends BaseEntity {
     public boolean isEnabled() {
         return enabled;
     }
-
-
-
-    public void addEgitim(Egitim egitim1){
-        egitim.add(egitim1);
-    }
-    public void addDeneyim(Deneyim deneyim){
-        deneyimler.add(deneyim);
-    }
-    public void removeDeneyim(Deneyim deneyim){
-        deneyimler.remove(deneyim);
-    }
-    public void RemoveEgitim(Egitim egitim1){
-        egitim.remove(egitim1);
-    }
-    public void addKatki(Katki katki){
-        katkilar.add(katki);
-    }
-    public void removeKatki(Katki katki){
-        katkilar.remove(katki);
-    }
-    public void addDosya(Dosya dosya){
-        dosyalar.add(dosya);
-    }
-    public void removeDosya(Dosya dosya){
-        dosyalar.remove(dosya);
-    }
-
-
 
     public UserHeaderResponse toUserHeaderResponse(){
         return new UserHeaderResponse(isim, soyisim, photo);

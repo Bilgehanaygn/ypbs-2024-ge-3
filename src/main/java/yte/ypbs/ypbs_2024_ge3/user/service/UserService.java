@@ -1,4 +1,4 @@
-package yte.ypbs.ypbs_2024_ge3.user.Service;
+package yte.ypbs.ypbs_2024_ge3.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import yte.ypbs.ypbs_2024_ge3.user.controller.UserBornTodayResponse;
 import yte.ypbs.ypbs_2024_ge3.user.controller.UserDataGridResponse;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
-import yte.ypbs.ypbs_2024_ge3.user.Repository.UserRepository;
+import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
 import java.time.LocalDate;

@@ -1,9 +1,8 @@
-package yte.ypbs.ypbs_2024_ge3.user.Repository;
+package yte.ypbs.ypbs_2024_ge3.user.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 
 import java.util.List;
