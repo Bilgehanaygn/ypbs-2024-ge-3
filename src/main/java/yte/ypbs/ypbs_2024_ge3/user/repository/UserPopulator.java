@@ -1,14 +1,12 @@
-package yte.ypbs.ypbs_2024_ge3.user.Repository;
+package yte.ypbs.ypbs_2024_ge3.user.repository;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import yte.ypbs.ypbs_2024_ge3.user.Entity.Kurumsal;
-import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.entity.Kurumsal;
+import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 public class UserPopulator {

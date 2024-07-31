@@ -1,6 +1,6 @@
-package yte.ypbs.ypbs_2024_ge3.user.Controller;
+package yte.ypbs.ypbs_2024_ge3.user.controller;
 
-import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 
 import java.time.LocalDate;
 

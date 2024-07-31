@@ -1,11 +1,15 @@
 package yte.ypbs.ypbs_2024_ge3.user.Service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import yte.ypbs.ypbs_2024_ge3.user.Controller.UserBornTodayResponse;
-import yte.ypbs.ypbs_2024_ge3.user.Controller.UserDataGridResponse;
-import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.controller.UserBornTodayResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.UserDataGridResponse;
+import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.Repository.UserRepository;
+import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -56,5 +60,13 @@ public class UserService {
         LocalDate birthDateParsed = LocalDate.parse(birthDate);
         User user = new User(name, surname, password, email, telefon, birthDateParsed, image);
         return userRepository.save(user);
+    }
+
+    public UserHeaderResponse findByUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getPrincipal() == null || authentication.getPrincipal().equals("anonymousUser")) return null;
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        return user.toUserHeaderResponse();
     }
 }

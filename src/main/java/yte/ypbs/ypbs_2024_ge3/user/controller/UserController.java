@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import yte.ypbs.ypbs_2024_ge3.user.Entity.User;
-import yte.ypbs.ypbs_2024_ge3.user.Service.UserService;
+import yte.ypbs.ypbs_2024_ge3.user.entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.service.UserService;
 
 import java.util.List;
 
