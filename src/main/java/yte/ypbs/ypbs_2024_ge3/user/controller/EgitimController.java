@@ -2,43 +2,40 @@ package yte.ypbs.ypbs_2024_ge3.user.controller;
 
 import org.springframework.web.bind.annotation.*;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Egitim;
-import yte.ypbs.ypbs_2024_ge3.user.entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
+import yte.ypbs.ypbs_2024_ge3.user.request.EgitimRequest;
 import yte.ypbs.ypbs_2024_ge3.user.response.EgitimResponse;
 import yte.ypbs.ypbs_2024_ge3.user.service.EgitimService;
+import yte.ypbs.ypbs_2024_ge3.user.service.UserService;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
 public class EgitimController {
 
+    private final UserService userService;
     private EgitimService egitimService;
+    private UserRepository userRepository;
 
-    public EgitimController(EgitimService egitimService) {
+    public EgitimController(EgitimService egitimService, UserRepository userRepository, UserService userService) {
         this.egitimService = egitimService;
+        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/egitim")
     public List<EgitimResponse> getUser() {
-
-        Set<Egitim> egitimler = egitimService.getUserEgitim("user");
-
-        List<EgitimResponse> egitimResponse = egitimler.stream().map(egitim -> {
-            return new EgitimResponse(
-                    egitim.getEgitimTuru().toString(),
-                    egitim.getOkulAdi(),
-                    egitim.getBolum(),
-                    egitim.getBaslangicTarihi().toString(),
-                    egitim.getMezuniyetTarihi().toString(),
-                    egitim.getAciklama());
-        }).toList();
-
-        return egitimResponse;
+        return egitimService.getUserEgitim().stream().map(Egitim::toEgitimResponse).toList();
     }
 
-    @PutMapping
-    public void updateUser(@RequestBody EgitimResponse egitimResponse) {
-        System.out.println("updateUser: " + egitimResponse);
+    @PutMapping("/egitim")
+    public void updateUser(@RequestBody List<EgitimRequest> egitimRequest) {
+        egitimService.updateUserEgitim(egitimRequest);
+    }
+
+    @DeleteMapping("/egitim/{id}")
+    public void deleteUser(@PathVariable long id) {
+        egitimService.deleteUserEgitim(id);
     }
 }

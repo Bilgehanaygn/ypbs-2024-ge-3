@@ -4,10 +4,7 @@ package yte.ypbs.ypbs_2024_ge3.user.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
@@ -30,6 +27,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "_user")
+@ToString
 public class User extends BaseEntity implements UserDetails {
 
     @NotBlank
@@ -162,9 +160,19 @@ public class User extends BaseEntity implements UserDetails {
     }
 
 
+    public void setEgitim(Set<Egitim> egitim) {
+        this.egitim.clear();
+        if (egitim != null) {
+            this.egitim.addAll(egitim);
+        }
+    }
+
 
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);
+    }
+    public void removeEgitim(Egitim egitim1){
+        egitim.remove(egitim1);
     }
     public void addDeneyim(Deneyim deneyim){
         deneyimler.add(deneyim);

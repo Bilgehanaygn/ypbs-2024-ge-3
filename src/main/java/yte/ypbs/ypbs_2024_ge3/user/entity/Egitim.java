@@ -3,20 +3,21 @@ package yte.ypbs.ypbs_2024_ge3.user.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 import yte.ypbs.ypbs_2024_ge3.user.enums.EgitimTuru;
+import yte.ypbs.ypbs_2024_ge3.user.request.EgitimRequest;
+import yte.ypbs.ypbs_2024_ge3.user.response.EgitimResponse;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Egitim extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
@@ -33,4 +34,8 @@ public class Egitim extends BaseEntity {
     private LocalDate mezuniyetTarihi;
 
     private String aciklama;
+
+    public EgitimResponse toEgitimResponse() {
+        return new EgitimResponse(id ,egitimTuru.toString(), okulAdi, bolum, baslangicTarihi.toString(), mezuniyetTarihi.toString(), aciklama);
+    }
 }

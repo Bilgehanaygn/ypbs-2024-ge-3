@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
@@ -24,6 +25,7 @@ public class UserService {
         return user.toUserHeaderResponse();
     }
 
+
     public User getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -37,4 +39,8 @@ public class UserService {
         return user;
     }
 
+    @Transactional
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
 }
