@@ -27,6 +27,11 @@ public class EgitimController {
         return egitimService.getEgitimEnums();
     }
 
+    @PostMapping("/egitim")
+    public void addEgitim(@RequestBody EgitimRequest egitimRequest) {
+        egitimService.addUserEgitim(egitimRequest);
+    }
+
     @PutMapping("/egitim/{id}")
     public void updateUser(@PathVariable Long id, @RequestBody EgitimRequest egitimRequest) {
         egitimService.updateUserEgitim(id, egitimRequest);

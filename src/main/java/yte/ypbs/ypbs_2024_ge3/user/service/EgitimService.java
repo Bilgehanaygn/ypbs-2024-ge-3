@@ -54,4 +54,11 @@ public class EgitimService {
         userService.getUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
         egitimRepository.delete(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
     }
+
+    @Transactional
+    public void addUserEgitim(EgitimRequest egitimRequests) {
+        Egitim newEgitim = egitimRequests.toNewEgitim();
+        egitimRepository.save(newEgitim);
+        userService.getUser().addEgitim(newEgitim);
+    }
 }
