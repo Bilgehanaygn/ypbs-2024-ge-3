@@ -1,12 +1,9 @@
 package yte.ypbs.ypbs_2024_ge3.user.controller;
 
 import org.springframework.web.bind.annotation.*;
-import yte.ypbs.ypbs_2024_ge3.user.entity.Egitim;
-import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 import yte.ypbs.ypbs_2024_ge3.user.request.EgitimRequest;
 import yte.ypbs.ypbs_2024_ge3.user.response.EgitimResponse;
 import yte.ypbs.ypbs_2024_ge3.user.service.EgitimService;
-import yte.ypbs.ypbs_2024_ge3.user.service.UserService;
 
 import java.util.List;
 
@@ -14,28 +11,29 @@ import java.util.List;
 @RequestMapping("/api")
 public class EgitimController {
 
-    private final UserService userService;
-    private EgitimService egitimService;
-    private UserRepository userRepository;
+    private final EgitimService egitimService;
 
-    public EgitimController(EgitimService egitimService, UserRepository userRepository, UserService userService) {
+    public EgitimController(EgitimService egitimService) {
         this.egitimService = egitimService;
-        this.userRepository = userRepository;
-        this.userService = userService;
     }
 
     @GetMapping("/egitim")
     public List<EgitimResponse> getUser() {
-        return egitimService.getUserEgitim().stream().map(Egitim::toEgitimResponse).toList();
+        return egitimService.getUserEgitim();
     }
 
-    @PutMapping("/egitim")
-    public void updateUser(@RequestBody List<EgitimRequest> egitimRequest) {
-        egitimService.updateUserEgitim(egitimRequest);
+    @GetMapping("/egitim/enum")
+    public List<String> getEgitimEnums() {
+        return egitimService.getEgitimEnums();
+    }
+
+    @PutMapping("/egitim/{id}")
+    public void updateUser(@PathVariable Long id, @RequestBody EgitimRequest egitimRequest) {
+        egitimService.updateUserEgitim(id, egitimRequest);
     }
 
     @DeleteMapping("/egitim/{id}")
-    public void deleteUser(@PathVariable long id) {
+    public void deleteUser(@PathVariable Long id) {
         egitimService.deleteUserEgitim(id);
     }
 }
