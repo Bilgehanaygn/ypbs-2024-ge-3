@@ -16,6 +16,7 @@ import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
+import yte.ypbs.ypbs_2024_ge3.user.response.UserDataResponse;
 import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
 
@@ -113,6 +114,9 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Dosya> dosyalar = new HashSet<>();
 
+    @Lob
+    @Column(name = "image", columnDefinition="BLOB")
+    private byte[] image;
 
     public User(String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
@@ -124,6 +128,18 @@ public class User extends BaseEntity implements UserDetails {
         this.telefon = telefon;
     }
 
+    public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.telefon = telefon;
+        this.dogumTarihi = dogumTarihi;
+        this.image = image;
+    }
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Kurumsal kurumsal;
 
     @Override
     public List<Authority> getAuthorities() {
@@ -191,5 +207,15 @@ public class User extends BaseEntity implements UserDetails {
 
     public UserHeaderResponse toUserHeaderResponse(){
         return new UserHeaderResponse(isim, soyisim, photo);
+    }
+
+    public UserDataResponse toUserDataResponse(){
+        return new UserDataResponse(isim+" "+soyisim,
+                                    this.getKurumsal().getUnvan(),
+                                    this.getKurumsal().getGorev(),
+                                    this.getKurumsal().getBirim(),
+                                    this.getKurumsal().getProje(),
+                                    email,
+                                    telefon);
     }
 }

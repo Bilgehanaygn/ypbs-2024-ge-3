@@ -25,9 +25,11 @@ public class Kurumsal extends BaseEntity {
     private long sicilNo;
     private String kadro;
     private String unvan;
+    private String birim;
 
     @ManyToOne
-    private Organization birim;
+    private Organization birim2;
+
 
     private String proje;
     private String gorev;
@@ -40,12 +42,20 @@ public class Kurumsal extends BaseEntity {
     private String dahiliNumara;
     private Integer odaNumara;
 
-    public Kurumsal(User user, LocalDate iseGirisTarihi, long sicilNo, String kadro, String unvan, Organization birim) {
+    public Kurumsal(User user, LocalDate iseGirisTarihi, long sicilNo, String kadro, String unvan, Organization birim2) {
         this.user = user;
         this.iseGirisTarihi = iseGirisTarihi;
         this.sicilNo = sicilNo;
         this.kadro = kadro;
         this.unvan = unvan;
+        this.birim2 = birim2;
+    }
+    //birim organizasyondan çekilecek
+    public Kurumsal(User user, String gorev, String unvan, String birim, String proje) {
+        this.user = user;
+        this.gorev = gorev;
+        this.unvan = unvan;
         this.birim = birim;
+        this.proje = proje;
     }
 }
