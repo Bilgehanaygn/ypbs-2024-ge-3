@@ -16,6 +16,7 @@ import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
+import yte.ypbs.ypbs_2024_ge3.user.response.GorevVeProje;
 import yte.ypbs.ypbs_2024_ge3.user.response.UserDataResponse;
 import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -209,12 +211,19 @@ public class User extends BaseEntity implements UserDetails {
         return new UserHeaderResponse(isim, soyisim, photo);
     }
 
-    public UserDataResponse toUserDataResponse(){
-        return new UserDataResponse((isim+" "+soyisim),
-                                    this.getKurumsal().getBirim().getName(),
-                                    this.getKurumsal().getUnvan(),
-                                    this.getKurumsal().getProjects().stream().map(proje -> proje.getProjeAdi() + " " + proje.getGorev()).toList(),
-                                    email,
-                                    telefon);
+    public UserDataResponse toUserDataResponse() {
+        return new UserDataResponse(
+                (isim + " " + soyisim),
+                this.getKurumsal().getBirim().getName(),
+                this.getKurumsal().getUnvan(),
+                this.getKurumsal().getKurumsalProjeler().stream().map(
+                        kurumsalProje -> new GorevVeProje(
+                                kurumsalProje.getGorev(),
+                                kurumsalProje.getProje().getProjeAdi()
+                        )
+                ).collect(Collectors.toList()),
+                email,
+                telefon
+        );
     }
 }

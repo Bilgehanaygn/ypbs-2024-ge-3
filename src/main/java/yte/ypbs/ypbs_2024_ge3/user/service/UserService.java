@@ -36,7 +36,7 @@ public class UserService {
                                                        String gorev,
                                                        String birim,
                                                        String proje) {
-        List<User> result = userRepository.findUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
+        List<User> result = userRepository.findUsersWithFilters(nameSurname, birim, unvan, gorev, proje);
         return result.stream()
                 .map(User::toUserDataResponse)
                 .collect(Collectors.toList());

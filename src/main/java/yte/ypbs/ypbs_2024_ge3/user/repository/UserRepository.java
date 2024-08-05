@@ -14,18 +14,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
     @Query("SELECT u FROM User u " +
-            "JOIN u.kurumsal k " +
+            "LEFT JOIN u.kurumsal k " +
             "LEFT JOIN k.birim b " +
-            "LEFT JOIN k.projects p " +
+            "LEFT JOIN k.kurumsalProjeler kp " +
+            "LEFT JOIN kp.proje p " +
             "WHERE LOWER(CONCAT(u.isim, ' ', u.soyisim)) LIKE LOWER(CONCAT('%', :nameSurname, '%')) " +
             "AND (:unvan IS NULL OR LOWER(k.unvan) LIKE LOWER(CONCAT('%', :unvan, '%'))) " +
             "AND (:birim IS NULL OR LOWER(b.name) LIKE LOWER(CONCAT('%', :birim, '%'))) " +
-            "AND (:gorev IS NULL OR LOWER(p.gorev) LIKE LOWER(CONCAT('%', :gorev, '%'))) " +
+            "AND (:gorev IS NULL OR LOWER(kp.gorev) LIKE LOWER(CONCAT('%', :gorev, '%'))) " +
             "AND (:proje IS NULL OR LOWER(p.projeAdi) LIKE LOWER(CONCAT('%', :proje, '%')))")
     List<User> findUsersWithFilters(
             @Param("nameSurname") String nameSurname,
-            @Param("unvan") String unvan,
             @Param("birim") String birim,
+            @Param("unvan") String unvan,
             @Param("gorev") String gorev,
             @Param("proje") String proje
     );

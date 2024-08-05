@@ -32,12 +32,8 @@ public class Kurumsal extends BaseEntity {
     @ManyToOne
     private Organization birim;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "kurumsal_proje",
-            joinColumns = @JoinColumn(name = "kurumsal_id"),
-            inverseJoinColumns = @JoinColumn(name = "proje_id")
-    )
-    private List<Proje> projects;
+    @OneToMany(mappedBy = "kurumsal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<KurumsalProje> kurumsalProjeler;
 
     @Enumerated(EnumType.STRING)
     private PersonelTuru personelTuru;
@@ -48,10 +44,10 @@ public class Kurumsal extends BaseEntity {
     private Integer odaNumara;
 
     //birim organizasyondan çekilecek
-    public Kurumsal(User user, String unvan, Organization birim, List<Proje> proje) {
+    public Kurumsal(User user, String unvan, Organization birim, List<KurumsalProje> kurumsalProjeler) {
         this.user = user;
         this.unvan = unvan;
         this.birim = birim;
-        this.projects = proje;
+        this.kurumsalProjeler = kurumsalProjeler;
     }
 }

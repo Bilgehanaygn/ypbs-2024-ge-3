@@ -5,7 +5,7 @@ import java.util.List;
 public record UserDataResponse(String isimSoyisim,
                                String birim,
                                String unvan,
-                               List<String> gorev, //proje+gorev
+                               List<GorevVeProje> gorevVeProje,
                                String email,
                                String telefon) {
 }
