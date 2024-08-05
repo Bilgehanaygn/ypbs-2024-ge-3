@@ -67,22 +67,71 @@ public class UserPopulator {
 //        );
 //        kurumsalRepository.save(kurumsal1);
 //        kurumsalRepository.save(kurumsal2);
-        Proje projectAlpha = new Proje("Project Alpha", "Team A");
-        Proje projectBeta = new Proje("Project Beta", "Team B");
-        projeRepository.saveAll(List.of(projectAlpha, projectBeta));
+        Proje mgm = new Proje("MGM", "Team A");
+        Proje eTedarik = new Proje("E-Tedarik", "Team B");
+        Dijital Strateji ve Dönüşüm Planlama
 
-        // Create sample users
-        User user = new User("Cemre", "Çelik", "cemre.celik", "password123", "cemre.celik@tubitak.gov.tr", "065555555555", LocalDate.of(1990, 5, 15), null);
-        userRepository.save(user);
+        Uzman Araştırmacı
 
-        // Create sample kurumsal data
-        Kurumsal kurumsal = new Kurumsal(user, "Researcher", organizationRepository.findByName("Dijital Strateji ve  Dönüşüm Planlama").orElseThrow(), null);
-        kurumsalRepository.save(kurumsal);
+        İş Analisti - MGM
 
-        // Create sample kurumsal_proje data
-        KurumsalProje kurumsalProje1 = new KurumsalProje(kurumsal, projectAlpha, "Lead Developer");
-        KurumsalProje kurumsalProje2 = new KurumsalProje(kurumsal, projectBeta, "Project Manager");
-        kurumsalProjeRepository.saveAll(List.of(kurumsalProje1, kurumsalProje2));
+        Proje Yönetici Yrd. - E-Tedarik
+
+        Mentör - PYBS
+
+        cemre.celik@tubitak.gov.tr
+
+        065555555555
+
+        Serkan Yılmaz
+
+        Yazılım Geliştirme Teknolojileri EMY
+
+        Stajyer
+
+        Full-Stack Developer - PYBS
+
+        serkan.yilmaz@tubitak.gov.tr
+
+        05345812322
+
+
+        Proje pybs = new Proje("PYBS", "Team C");
+        projeRepository.saveAll(List.of(mgm, eTedarik, pybs));
+
+        User cemre = new User("Cemre",
+                "Çelik",
+                "cemre.celik",
+                passwordEncoder.encode("123"),
+                "cemre.celik@tubitak.gov.tr",
+                "065555555555", LocalDate.of(1990, 5, 15),
+                null);
+        User serkan = new User("Serkan",
+                "Yılmaz",
+                "serkan.yilmaz",
+                passwordEncoder.encode("123"),
+                "serkan.yilmaz@tubitak.gov.tr",
+                "05345812322", LocalDate.of(2003, 4, 14),
+                null);
+
+        userRepository.saveAll(List.of(cemre,serkan));
+
+        Kurumsal kurumsalCemre = new Kurumsal(cemre,
+                "Uzman Araştırmacı",
+                organizationRepository.findByName("Dijital Strateji ve  Dönüşüm Planlama").orElseThrow(),
+                null);
+        Kurumsal kurumsalSerkan = new Kurumsal(serkan,
+                "Stajyer",
+                organizationRepository.findByName("Yazılım Geliştirme Teknolojileri EMY").orElseThrow(),
+                null);
+
+        kurumsalRepository.saveAll(List.of(kurumsalCemre,kurumsalSerkan));
+
+        KurumsalProje kurumsalProje1 = new KurumsalProje(kurumsalCemre, mgm, "İş Analisti");
+        KurumsalProje kurumsalProje2 = new KurumsalProje(kurumsalCemre, eTedarik, "Proje Yönetici Yrd.");
+        KurumsalProje kurumsalProje3 = new KurumsalProje(kurumsalCemre, pybs, "Mentör");
+        KurumsalProje kurumsalProje4 = new KurumsalProje(kurumsalSerkan,pybs, "Full-Stack Developer");
+        kurumsalProjeRepository.saveAll(List.of(kurumsalProje1, kurumsalProje2, kurumsalProje3, kurumsalProje4));
 
 
     }
