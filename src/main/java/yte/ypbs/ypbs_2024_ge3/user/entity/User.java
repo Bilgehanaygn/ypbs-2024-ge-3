@@ -13,7 +13,7 @@ import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
 
 
 import java.time.LocalDate;
@@ -158,15 +158,6 @@ public class User extends BaseEntity implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-
-
-    public void setEgitim(Set<Egitim> egitim) {
-        this.egitim.clear();
-        if (egitim != null) {
-            this.egitim.addAll(egitim);
-        }
-    }
-
 
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);

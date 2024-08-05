@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
 
 @Service
 public class UserService {

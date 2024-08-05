@@ -1,8 +1,8 @@
 package yte.ypbs.ypbs_2024_ge3.user.controller;
 
 import org.springframework.web.bind.annotation.*;
-import yte.ypbs.ypbs_2024_ge3.user.request.EgitimRequest;
-import yte.ypbs.ypbs_2024_ge3.user.response.EgitimResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.request.EgitimRequest;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.EgitimResponse;
 import yte.ypbs.ypbs_2024_ge3.user.service.EgitimService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class EgitimController {
     }
 
     @GetMapping("/egitim")
-    public List<EgitimResponse> getUser() {
+    public List<EgitimResponse> getUserEgitim() {
         return egitimService.getUserEgitim();
     }
 
@@ -28,17 +28,17 @@ public class EgitimController {
     }
 
     @PostMapping("/egitim")
-    public void addEgitim(@RequestBody EgitimRequest egitimRequest) {
+    public void addUserEgitim(@RequestBody EgitimRequest egitimRequest) {
         egitimService.addUserEgitim(egitimRequest);
     }
 
     @PutMapping("/egitim/{id}")
-    public void updateUser(@PathVariable Long id, @RequestBody EgitimRequest egitimRequest) {
+    public void updateUserEgitim(@PathVariable Long id, @RequestBody EgitimRequest egitimRequest) {
         egitimService.updateUserEgitim(id, egitimRequest);
     }
 
     @DeleteMapping("/egitim/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUserEgitim(@PathVariable Long id) {
         egitimService.deleteUserEgitim(id);
     }
 }

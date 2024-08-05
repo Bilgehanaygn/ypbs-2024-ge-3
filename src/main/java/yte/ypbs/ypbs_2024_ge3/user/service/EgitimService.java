@@ -5,13 +5,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Egitim;
 import yte.ypbs.ypbs_2024_ge3.user.enums.EgitimTuru;
+import yte.ypbs.ypbs_2024_ge3.user.mapper.EgitimMapper;
 import yte.ypbs.ypbs_2024_ge3.user.repository.EgitimRepository;
-import yte.ypbs.ypbs_2024_ge3.user.request.EgitimRequest;
-import yte.ypbs.ypbs_2024_ge3.user.response.EgitimResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.request.EgitimRequest;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.EgitimResponse;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import static yte.ypbs.ypbs_2024_ge3.user.mapper.EgitimMapper.toEgitimEntity;
+import static yte.ypbs.ypbs_2024_ge3.user.mapper.EgitimMapper.toNewEgitim;
 
 @Service
 public class EgitimService {
@@ -28,7 +32,7 @@ public class EgitimService {
     public List<EgitimResponse> getUserEgitim() {
 
         Set<Egitim> egitimSet = userService.getUser().getEgitim();
-        return egitimSet.stream().map(Egitim::toEgitimResponse).toList();
+        return egitimSet.stream().map(EgitimMapper::toEgitimResponse).toList();
     }
 
     public Set<Egitim> getUserEgitim(String username) {
@@ -44,7 +48,7 @@ public class EgitimService {
     public void updateUserEgitim(Long id, EgitimRequest egitimRequests) {
 
         Egitim egitim = egitimRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Egitim not found with id: " + id));
-        egitim.setFromEgitimRequest(egitimRequests);
+        toEgitimEntity(egitim, egitimRequests);
         egitimRepository.save(egitim);
     }
 
@@ -57,7 +61,7 @@ public class EgitimService {
 
     @Transactional
     public void addUserEgitim(EgitimRequest egitimRequests) {
-        Egitim newEgitim = egitimRequests.toNewEgitim();
+        Egitim newEgitim = toNewEgitim(egitimRequests);
         egitimRepository.save(newEgitim);
         userService.getUser().addEgitim(newEgitim);
     }
