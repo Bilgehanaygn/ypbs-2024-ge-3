@@ -210,11 +210,10 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     public UserDataResponse toUserDataResponse(){
-        return new UserDataResponse(isim+" "+soyisim,
+        return new UserDataResponse((isim+" "+soyisim),
+                                    this.getKurumsal().getBirim().getName(),
                                     this.getKurumsal().getUnvan(),
-                                    this.getKurumsal().getGorev(),
-                                    this.getKurumsal().getBirim(),
-                                    this.getKurumsal().getProje(),
+                                    this.getKurumsal().getProjects().stream().map(proje -> proje.getProjeAdi() + " " + proje.getGorev()).toList(),
                                     email,
                                     telefon);
     }

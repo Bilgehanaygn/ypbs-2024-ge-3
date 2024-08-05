@@ -13,19 +13,24 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
+    @Query("SELECT u FROM User u " +
+            "JOIN u.kurumsal k " +
+            "LEFT JOIN k.birim b " +
+            "LEFT JOIN k.projects p " +
+            "WHERE LOWER(CONCAT(u.isim, ' ', u.soyisim)) LIKE LOWER(CONCAT('%', :nameSurname, '%')) " +
+            "AND (:unvan IS NULL OR LOWER(k.unvan) LIKE LOWER(CONCAT('%', :unvan, '%'))) " +
+            "AND (:birim IS NULL OR LOWER(b.name) LIKE LOWER(CONCAT('%', :birim, '%'))) " +
+            "AND (:gorev IS NULL OR LOWER(p.gorev) LIKE LOWER(CONCAT('%', :gorev, '%'))) " +
+            "AND (:proje IS NULL OR LOWER(p.projeAdi) LIKE LOWER(CONCAT('%', :proje, '%')))")
+    List<User> findUsersWithFilters(
+            @Param("nameSurname") String nameSurname,
+            @Param("unvan") String unvan,
+            @Param("birim") String birim,
+            @Param("gorev") String gorev,
+            @Param("proje") String proje
+    );
+
     /*
      * Katkı ve Takım araması yapmıyor. Düzeltilmeli.
      */
-    @Query("SELECT u " +
-            "FROM User u JOIN Kurumsal k ON k.user = u " +
-            "WHERE LOWER(CONCAT(u.isim, ' ', u.soyisim)) LIKE LOWER(CONCAT('%', :nameSurname, '%')) " +
-            "AND LOWER(k.unvan) LIKE LOWER(CONCAT('%', :unvan, '%')) " +
-            "AND LOWER(k.gorev) LIKE LOWER(CONCAT('%', :gorev, '%')) " +
-            "AND LOWER(k.birim) LIKE LOWER(CONCAT('%', :birim, '%')) " +
-            "AND LOWER(k.proje) LIKE LOWER(CONCAT('%', :proje, '%'))")
-    List<User> findUsersWithFilters(@Param("nameSurname") String nameSurname,
-                                      @Param("unvan") String unvan,
-                                      @Param("gorev") String gorev,
-                                      @Param("birim") String birim,
-                                      @Param("proje") String proje);
 }

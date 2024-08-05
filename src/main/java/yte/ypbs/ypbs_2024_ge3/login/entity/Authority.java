@@ -11,6 +11,7 @@ import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Getter
@@ -21,15 +22,6 @@ import java.util.List;
 public class Authority extends BaseEntity implements GrantedAuthority {
 
     private String authority;
-
-
-    @ManyToMany
-    private List<User> users;
-
-    public Authority(String authority) {
-        super();
-        this.authority = authority;
-    }
 
     @Override
     public String getAuthority() {

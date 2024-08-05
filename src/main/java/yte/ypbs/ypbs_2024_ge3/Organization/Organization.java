@@ -15,7 +15,6 @@ import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 public class Organization extends BaseEntity {
     private String name;
 
-
     @ManyToOne
     private Organization top;
 
