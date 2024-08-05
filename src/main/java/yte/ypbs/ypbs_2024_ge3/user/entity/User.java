@@ -111,6 +111,13 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Dosya> dosyalar = new HashSet<>();
 
+    @Lob
+    @Column(name = "image", columnDefinition="BLOB")
+    private byte[] image;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Kurumsal kurumsal;
+
 
     public User(Set<Egitim> egitim, String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
@@ -121,6 +128,18 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities = authorities;
         this.telefon = telefon;
         this.egitim = egitim;
+    }
+
+
+    public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.telefon = telefon;
+        this.dogumTarihi = dogumTarihi;
+        this.image = image;
     }
 
 
