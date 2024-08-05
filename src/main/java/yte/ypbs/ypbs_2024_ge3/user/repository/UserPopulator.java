@@ -69,33 +69,6 @@ public class UserPopulator {
 //        kurumsalRepository.save(kurumsal2);
         Proje mgm = new Proje("MGM", "Team A");
         Proje eTedarik = new Proje("E-Tedarik", "Team B");
-        Dijital Strateji ve Dönüşüm Planlama
-
-        Uzman Araştırmacı
-
-        İş Analisti - MGM
-
-        Proje Yönetici Yrd. - E-Tedarik
-
-        Mentör - PYBS
-
-        cemre.celik@tubitak.gov.tr
-
-        065555555555
-
-        Serkan Yılmaz
-
-        Yazılım Geliştirme Teknolojileri EMY
-
-        Stajyer
-
-        Full-Stack Developer - PYBS
-
-        serkan.yilmaz@tubitak.gov.tr
-
-        05345812322
-
-
         Proje pybs = new Proje("PYBS", "Team C");
         projeRepository.saveAll(List.of(mgm, eTedarik, pybs));
 
