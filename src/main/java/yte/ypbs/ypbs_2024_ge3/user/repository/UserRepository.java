@@ -22,13 +22,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "AND (:unvan IS NULL OR LOWER(k.unvan) LIKE LOWER(CONCAT('%', :unvan, '%'))) " +
             "AND (:birim IS NULL OR LOWER(b.name) LIKE LOWER(CONCAT('%', :birim, '%'))) " +
             "AND (:gorev IS NULL OR LOWER(kp.gorev) LIKE LOWER(CONCAT('%', :gorev, '%'))) " +
-            "AND (:proje IS NULL OR LOWER(p.projeAdi) LIKE LOWER(CONCAT('%', :proje, '%')))")
+            "AND (:proje IS NULL OR LOWER(p.projeAdi) LIKE LOWER(CONCAT('%', :proje, '%')))"+
+            "AND (:takim IS NULL OR LOWER(p.takim) LIKE LOWER(CONCAT('%', :takim, '%')))")
     List<User> findUsersWithFilters(
             @Param("nameSurname") String nameSurname,
             @Param("birim") String birim,
             @Param("unvan") String unvan,
             @Param("gorev") String gorev,
-            @Param("proje") String proje
+            @Param("proje") String proje,
+            @Param("takim") String takim
     );
 
     /*

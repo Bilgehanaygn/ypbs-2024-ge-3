@@ -27,11 +27,12 @@ public class UserController {
 
     @GetMapping("/findUsersWithFilters")
     public List<UserDataResponse> findUsersWithFilters(String nameSurname,
-                                                      String unvan,
-                                                      String gorev,
-                                                      String birim,
-                                                      String proje) {
-        return userService.findUsersWithFilters(nameSurname, unvan, gorev, birim, proje);
+                                                          String unvan,
+                                                          String gorev,
+                                                          String birim,
+                                                          String proje,
+                                                          String takim) {
+        return userService.findUsersWithFilters(nameSurname, unvan, gorev, birim, proje, takim);
     }
 
 
