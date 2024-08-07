@@ -27,10 +27,12 @@ public class Proje extends BaseEntity {
     @Column(nullable = true)
     private LocalDate bitisTarihi;
 
-    public Proje(String projeAdi, String takim, String gorev) {
+    public Proje(String projeAdi, String takim, String gorev, LocalDate baslangicTarihi, LocalDate bitisTarihi) {
         this.projeAdi = projeAdi;
         this.takim = takim;
         this.gorev = gorev;
+        this.baslangicTarihi = baslangicTarihi;
+        this.bitisTarihi = bitisTarihi;
     }
 
 }

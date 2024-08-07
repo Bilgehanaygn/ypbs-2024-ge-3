@@ -1,7 +1,9 @@
-package yte.ypbs.ypbs_2024_ge3.Organization;
+package yte.ypbs.ypbs_2024_ge3.common.populator;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
+import yte.ypbs.ypbs_2024_ge3.Organization.Organization;
+import yte.ypbs.ypbs_2024_ge3.Organization.OrganizationRepository;
 
 import java.util.List;
 

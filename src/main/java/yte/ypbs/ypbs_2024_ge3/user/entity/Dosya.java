@@ -18,14 +18,16 @@ public class Dosya extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private DosyaTuru dosyaTuru;
     private String dosyaAdi;
-    private String bolum;
+    private LocalDate yuklenmeTarihi = LocalDate.now();
+    private String aciklama;
 
+    @Lob
+    private byte[] dosya;
 
-    private LocalDate yuklenmeTarihi;
-
-    public Dosya(DosyaTuru dosyaTuru, String dosyaAdi, String bolum) {
+    public Dosya(DosyaTuru dosyaTuru, String dosyaAdi, String aciklama, byte[] dosya) {
         this.dosyaTuru = dosyaTuru;
         this.dosyaAdi = dosyaAdi;
-        this.bolum = bolum;
+        this.aciklama = aciklama;
+        this.dosya = dosya;
     }
 }

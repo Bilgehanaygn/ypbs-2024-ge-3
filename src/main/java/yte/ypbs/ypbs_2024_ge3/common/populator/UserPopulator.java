@@ -1,18 +1,22 @@
-package yte.ypbs.ypbs_2024_ge3.user.repository;
+package yte.ypbs.ypbs_2024_ge3.common.populator;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import yte.ypbs.ypbs_2024_ge3.Organization.OrganizationPopulator;
 import yte.ypbs.ypbs_2024_ge3.Organization.OrganizationRepository;
+import yte.ypbs.ypbs_2024_ge3.user.entity.Dosya;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Kurumsal;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Proje;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.enums.DosyaTuru;
+import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalRepository;
+import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class UserPopulator {
@@ -39,7 +43,18 @@ public class UserPopulator {
         organizationPopulator.populate();
 
 
-        User user1 = new User("Cemre", "Çelik", "cemrecelik",passwordEncoder.encode("cemre"), "cemre.celik@tubitak.gov.tr", "065555555555", LocalDate.of(2020, 7, 24), null);
+        User user1 = new User(
+                "Cemre",
+                "Çelik",
+                "a",
+                passwordEncoder.encode("a"),
+                "cemre.celik@tubitak.gov.tr",
+                "065555555555",
+                LocalDate.of(2020, 7, 24),
+                null,
+                Set.of(new Dosya(DosyaTuru.CV,"cv deneme","denene dosya", null),
+                        new Dosya(DosyaTuru.DIPLOMA,"diploma deneme","diploma dosya", null))
+                );
 
         userRepository.save(user1);
 
@@ -47,9 +62,9 @@ public class UserPopulator {
                 user1,
                 "Uzman Araştırmacı",
                 organizationRepository.findByName("Dijital Strateji ve  Dönüşüm Planlama").orElseThrow(),
-                List.of(new Proje("proje adi", "takim","görev"),
-                        new Proje("proje adı 2", " takim 2", "görev 23"),
-                        new Proje("proje 3","takim3","gorev3"))
+                List.of(new Proje("proje adi", "takim","görev", LocalDate.of(2020, 12, 12), LocalDate.of(2020, 12, 12)),
+                        new Proje("proje adı 2", " takim 2", "görev 23", LocalDate.of(2020, 12, 12), LocalDate.of(2020, 12, 12)),
+                        new Proje("proje 3"," takim3", "gorev3", LocalDate.of(2020, 12, 12), LocalDate.of(2020, 12, 12)))
         );
         kurumsalRepository.save(kurumsal1);
 

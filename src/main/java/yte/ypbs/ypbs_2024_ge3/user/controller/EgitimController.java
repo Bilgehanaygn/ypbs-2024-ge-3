@@ -2,7 +2,7 @@ package yte.ypbs.ypbs_2024_ge3.user.controller;
 
 import org.springframework.web.bind.annotation.*;
 import yte.ypbs.ypbs_2024_ge3.user.controller.request.EgitimRequest;
-import yte.ypbs.ypbs_2024_ge3.user.controller.response.EgitimResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersEgitimResponse;
 import yte.ypbs.ypbs_2024_ge3.user.service.EgitimService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class EgitimController {
     }
 
     @GetMapping("/egitim")
-    public List<EgitimResponse> getUserEgitim() {
+    public List<UsersEgitimResponse> getUserEgitim() {
         return egitimService.getUserEgitim();
     }
 

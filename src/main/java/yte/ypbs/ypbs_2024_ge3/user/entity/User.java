@@ -131,7 +131,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
 
-    public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
+    public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image, Set<Dosya> dosyalar) {
         this.isim = isim;
         this.soyisim = soyisim;
         this.username = username;
@@ -140,6 +140,7 @@ public class User extends BaseEntity implements UserDetails {
         this.telefon = telefon;
         this.dogumTarihi = dogumTarihi;
         this.image = image;
+        this.dosyalar=dosyalar;
     }
 
 
