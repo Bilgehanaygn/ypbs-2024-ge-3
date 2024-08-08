@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//@EqualsAndHashCode(callSuper = true)
 @Table(name = "authority")
 public class Authority extends BaseEntity implements GrantedAuthority {
 

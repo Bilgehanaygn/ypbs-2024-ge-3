@@ -17,8 +17,8 @@ import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
 import yte.ypbs.ypbs_2024_ge3.user.response.GorevVeProje;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserDataResponse;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserDataResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
 
 
 import java.time.LocalDate;
@@ -120,6 +120,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "image", columnDefinition="BLOB")
     private byte[] image;
 
+
     public User(String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
         this.soyisim = soyisim;
@@ -129,6 +130,7 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities = authorities;
         this.telefon = telefon;
     }
+
 
     public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
         this.isim = isim;
@@ -140,6 +142,18 @@ public class User extends BaseEntity implements UserDetails {
         this.dogumTarihi = dogumTarihi;
         this.image = image;
     }
+
+    public User(Set<Egitim> egitim, String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+        this.telefon = telefon;
+        this.egitim = egitim;
+    }
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Kurumsal kurumsal;
 
@@ -178,10 +192,11 @@ public class User extends BaseEntity implements UserDetails {
         return enabled;
     }
 
-
-
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);
+    }
+    public void removeEgitim(Egitim egitim1){
+        egitim.remove(egitim1);
     }
     public void addDeneyim(Deneyim deneyim){
         deneyimler.add(deneyim);
@@ -206,11 +221,6 @@ public class User extends BaseEntity implements UserDetails {
     }
 
 
-
-    public UserHeaderResponse toUserHeaderResponse(){
-        return new UserHeaderResponse(isim, soyisim, photo);
-    }
-
     public UserDataResponse toUserDataResponse() {
         return new UserDataResponse(
                 (isim + " " + soyisim),
@@ -225,5 +235,9 @@ public class User extends BaseEntity implements UserDetails {
                 email,
                 telefon
         );
+    }
+
+    public UserHeaderResponse toUserHeaderResponse(){
+        return new UserHeaderResponse(isim, soyisim, photo);
     }
 }

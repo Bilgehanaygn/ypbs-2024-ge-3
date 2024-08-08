@@ -43,7 +43,7 @@ public class Kurumsal extends BaseEntity {
     private String dahiliNumara;
     private Integer odaNumara;
 
-    //birim organizasyondan çekilecek
+
     public Kurumsal(User user, String unvan, Organization birim, List<KurumsalProje> kurumsalProjeler) {
         this.user = user;
         this.unvan = unvan;
@@ -51,3 +51,4 @@ public class Kurumsal extends BaseEntity {
         this.kurumsalProjeler = kurumsalProjeler;
     }
 }
+

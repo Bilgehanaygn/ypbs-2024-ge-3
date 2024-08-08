@@ -1,8 +1,7 @@
 package yte.ypbs.ypbs_2024_ge3.Organization;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class OrganizationPopulator {
     public OrganizationPopulator(OrganizationRepository organizationRepository) {
         this.organizationRepository = organizationRepository;
     }
+
 
     @Transactional
     public void populate() {

@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserDataResponse;
 
 import java.util.List;
 import java.util.Map;

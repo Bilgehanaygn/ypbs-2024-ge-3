@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.security.AuthProvider;
 
 @Service
 public class AuthenticationService {
