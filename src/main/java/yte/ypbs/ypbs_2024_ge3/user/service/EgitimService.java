@@ -39,7 +39,7 @@ public class EgitimService {
         return userService.getUser(username).getEgitim();
     }
 
-    public List<String> getEgitimEnums(){
+    public List<String> getEgitimEnums() {
         return Stream.of(EgitimTuru.values()).map(Enum::name).toList();
     }
 
@@ -47,7 +47,7 @@ public class EgitimService {
     @Transactional
     public void updateUserEgitim(Long id, EgitimRequest egitimRequests) {
 
-        Egitim egitim = egitimRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Egitim not found with id: " + id));
+        Egitim egitim = egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id));
         toEgitimEntity(egitim, egitimRequests);
         egitimRepository.save(egitim);
     }
@@ -56,7 +56,7 @@ public class EgitimService {
     public void deleteUserEgitim(Long id) {
 
         userService.getUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
-        egitimRepository.delete(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
+        egitimRepository.deleteById(id);
     }
 
     @Transactional

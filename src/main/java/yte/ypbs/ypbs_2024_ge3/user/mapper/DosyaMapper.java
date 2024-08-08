@@ -28,5 +28,6 @@ public class DosyaMapper {
     }
 
     public static UsersDosyaFileResponse toUsersDosyaFileResponse(Dosya dosya) {
+        return new UsersDosyaFileResponse(dosya.getDosyaAdi(), dosya.getDosya());
     }
 }
