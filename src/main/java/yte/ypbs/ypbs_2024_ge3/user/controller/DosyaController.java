@@ -27,6 +27,10 @@ public class DosyaController {
         return dosyaService.getUserDosyaDetails();
     }
 
+    @GetMapping("/dosya/enum")
+    public List<String> getDosyaEnum() {
+        return dosyaService.getDosyaEnums();
+    }
 
     @GetMapping("/dosya/download/{id}")
     public void downloadUserDosya(@PathVariable Long id, HttpServletResponse response) throws IOException {
@@ -46,7 +50,6 @@ public class DosyaController {
         }
     }
 
-
     @PostMapping(value = "/dosya/upload",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -58,13 +61,6 @@ public class DosyaController {
             return ("Could not upload the file: " + e.getMessage());
         }
     }
-
-
-    @GetMapping("/dosya/enum")
-    public List<String> getUserDosyaEnum() {
-        return dosyaService.getDosyaEnums();
-    }
-
 
     @DeleteMapping("/dosya/{id}")
     public void deleteUserDosya(@PathVariable Long id) {

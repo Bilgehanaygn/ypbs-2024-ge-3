@@ -17,18 +17,21 @@ import java.time.LocalDate;
 public class Katki extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private EtkinlikTuru etkinlikTuru;
 
     private String aciklama;
     private String link;
-    private String ek;
-    private LocalDate yuklenmeTarihi;
+    @Lob
+    private byte[] ek;
+    private String ekAdi;
 
-    public Katki(EtkinlikTuru etkinlikTuru, String link, String ek, LocalDate yuklenmeTarihi) {
+    private LocalDate yuklenmeTarihi = LocalDate.now();
+
+    public Katki(EtkinlikTuru etkinlikTuru, String aciklama, String link, byte[] ek, String ekAdi) {
         this.etkinlikTuru = etkinlikTuru;
+        this.aciklama = aciklama;
         this.link = link;
         this.ek = ek;
-        this.yuklenmeTarihi = yuklenmeTarihi;
+        this.ekAdi = ekAdi;
     }
 }
