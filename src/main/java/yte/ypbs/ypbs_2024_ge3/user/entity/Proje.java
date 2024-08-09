@@ -3,6 +3,7 @@ package yte.ypbs.ypbs_2024_ge3.user.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +15,14 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Proje extends BaseEntity {
 
     @NotBlank
     private String projeAdi;
     @NotBlank
     private String takim;
+//    @NotBlank
     private LocalDate baslangicTarihi;
     @Column(nullable = true)
     private LocalDate bitisTarihi;
@@ -28,5 +31,4 @@ public class Proje extends BaseEntity {
         this.projeAdi = projeAdi;
         this.takim = takim;
     }
-
 }

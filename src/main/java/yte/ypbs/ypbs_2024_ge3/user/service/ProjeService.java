@@ -11,8 +11,6 @@ import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalRepository;
 import yte.ypbs.ypbs_2024_ge3.user.repository.ProjeRepository;
 import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserDataResponse;
-import yte.ypbs.ypbs_2024_ge3.user.response.UserHeaderResponse;
 
 import java.util.ArrayList;
 import java.util.List;
