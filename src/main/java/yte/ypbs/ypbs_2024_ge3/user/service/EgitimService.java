@@ -8,7 +8,7 @@ import yte.ypbs.ypbs_2024_ge3.user.enums.EgitimTuru;
 import yte.ypbs.ypbs_2024_ge3.user.mapper.EgitimMapper;
 import yte.ypbs.ypbs_2024_ge3.user.repository.EgitimRepository;
 import yte.ypbs.ypbs_2024_ge3.user.controller.request.EgitimRequest;
-import yte.ypbs.ypbs_2024_ge3.user.controller.response.EgitimResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersEgitimResponse;
 
 import java.util.List;
 import java.util.Set;
@@ -29,17 +29,17 @@ public class EgitimService {
     }
 
     //Returns the Authenticated User's egitim
-    public List<EgitimResponse> getUserEgitim() {
+    public List<UsersEgitimResponse> getUserEgitim() {
 
         Set<Egitim> egitimSet = userService.getUser().getEgitim();
-        return egitimSet.stream().map(EgitimMapper::toEgitimResponse).toList();
+        return egitimSet.stream().map(EgitimMapper::toUsersEgitimResponse).toList();
     }
 
     public Set<Egitim> getUserEgitim(String username) {
         return userService.getUser(username).getEgitim();
     }
 
-    public List<String> getEgitimEnums(){
+    public List<String> getEgitimEnums() {
         return Stream.of(EgitimTuru.values()).map(Enum::name).toList();
     }
 
@@ -47,7 +47,7 @@ public class EgitimService {
     @Transactional
     public void updateUserEgitim(Long id, EgitimRequest egitimRequests) {
 
-        Egitim egitim = egitimRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Egitim not found with id: " + id));
+        Egitim egitim = egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id));
         toEgitimEntity(egitim, egitimRequests);
         egitimRepository.save(egitim);
     }
@@ -56,7 +56,7 @@ public class EgitimService {
     public void deleteUserEgitim(Long id) {
 
         userService.getUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
-        egitimRepository.delete(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
+        egitimRepository.deleteById(id);
     }
 
     @Transactional

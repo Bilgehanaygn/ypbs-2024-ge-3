@@ -1,20 +1,23 @@
-package yte.ypbs.ypbs_2024_ge3.user.repository;
+package yte.ypbs.ypbs_2024_ge3.common.populator;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import yte.ypbs.ypbs_2024_ge3.Organization.OrganizationPopulator;
 import yte.ypbs.ypbs_2024_ge3.Organization.OrganizationRepository;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Kurumsal;
 import yte.ypbs.ypbs_2024_ge3.user.entity.KurumsalProje;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Proje;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalProjeRepository;
+import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalRepository;
+import yte.ypbs.ypbs_2024_ge3.user.repository.ProjeRepository;
+import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class UserPopulator {
@@ -44,25 +47,25 @@ public class UserPopulator {
 
         organizationPopulator.populate();
 
-        Proje mgm = new Proje("MGM", "Team A");
-        Proje eTedarik = new Proje("E-Tedarik", "Team B");
-        Proje pybs = new Proje("PYBS", "Team C");
+        Proje mgm = new Proje("MGM", "Team A", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje eTedarik = new Proje("E-Tedarik", "Team B", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje pybs = new Proje("PYBS", "Team C", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
         projeRepository.saveAll(List.of(mgm, eTedarik, pybs));
 
         User cemre = new User("Cemre",
                 "Çelik",
-                "cemre.celik",
-                passwordEncoder.encode("123"),
+                "a",
+                passwordEncoder.encode("a"),
                 "cemre.celik@tubitak.gov.tr",
                 "065555555555", LocalDate.of(1990, 5, 15),
-                null);
+                null, Set.of());
         User serkan = new User("Serkan",
                 "Yılmaz",
-                "serkan.yilmaz",
+                "b",
                 passwordEncoder.encode("123"),
                 "serkan.yilmaz@tubitak.gov.tr",
                 "05345812322", LocalDate.of(2003, 4, 14),
-                null);
+                null, Set.of());
 
         userRepository.saveAll(List.of(cemre,serkan));
 
@@ -83,11 +86,11 @@ public class UserPopulator {
         KurumsalProje kurumsalProje4 = new KurumsalProje(kurumsalSerkan,pybs, "Full-Stack Developer");
         kurumsalProjeRepository.saveAll(List.of(kurumsalProje1, kurumsalProje2, kurumsalProje3, kurumsalProje4));
 
-        Proje project1 = new Proje("CRM System", "Team A");
-        Proje project2 = new Proje("HR Management", "Team B");
-        Proje project3 = new Proje("Supply Chain", "Team C");
-        Proje project4 = new Proje("E-Commerce Platform", "Team A");
-        Proje project5 = new Proje("Data Analytics", "Team D");
+        Proje project1 = new Proje("CRM System", "Team A", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project2 = new Proje("HR Management", "Team B", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project3 = new Proje("Supply Chain", "Team C", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project4 = new Proje("E-Commerce Platform", "Team A", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project5 = new Proje("Data Analytics", "Team D", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
 
 // Saving additional Proje instances
         projeRepository.saveAll(List.of(project1, project2, project3, project4, project5));
@@ -98,35 +101,35 @@ public class UserPopulator {
                 passwordEncoder.encode("password123"),
                 "alice.johnson@company.com",
                 "05412345678", LocalDate.of(1985, 1, 20),
-                null);
+                null, Set.of());
         User bob = new User("Bob",
                 "Smith",
                 "bob.smith",
                 passwordEncoder.encode("securePass"),
                 "bob.smith@company.com",
                 "05498765432", LocalDate.of(1992, 6, 30),
-                null);
+                null, Set.of());
         User charlie = new User("Charlie",
                 "Brown",
                 "charlie.brown",
                 passwordEncoder.encode("charliePass"),
                 "charlie.brown@company.com",
                 "05466677889", LocalDate.of(1998, 11, 10),
-                null);
+                null, Set.of());
         User diana = new User("Diana",
                 "Prince",
                 "diana.prince",
                 passwordEncoder.encode("wonderWoman"),
                 "diana.prince@company.com",
                 "05333344455", LocalDate.of(1989, 3, 8),
-                null);
+                null, Set.of());
         User edward = new User("Edward",
                 "Kenway",
                 "edward.kenway",
                 passwordEncoder.encode("pirate123"),
                 "edward.kenway@company.com",
                 "05411223344", LocalDate.of(1995, 7, 17),
-                null);
+                null, Set.of());
 
 // Saving additional User instances
         userRepository.saveAll(List.of(alice, bob, charlie, diana, edward));

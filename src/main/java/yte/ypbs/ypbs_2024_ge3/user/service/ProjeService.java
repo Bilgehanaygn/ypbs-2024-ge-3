@@ -1,36 +1,69 @@
 package yte.ypbs.ypbs_2024_ge3.user.service;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import yte.ypbs.ypbs_2024_ge3.user.controller.ProjeController;
-import yte.ypbs.ypbs_2024_ge3.user.entity.Kurumsal;
-import yte.ypbs.ypbs_2024_ge3.user.entity.Proje;
-import yte.ypbs.ypbs_2024_ge3.user.entity.User;
-import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalRepository;
+import org.springframework.transaction.annotation.Transactional;
+import yte.ypbs.ypbs_2024_ge3.user.controller.request.UsersProjeRequest;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersProjeResponse;
+import yte.ypbs.ypbs_2024_ge3.user.entity.KurumsalProje;
+import yte.ypbs.ypbs_2024_ge3.user.mapper.KurumsalProjeMapper;
+import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalProjeRepository;
 import yte.ypbs.ypbs_2024_ge3.user.repository.ProjeRepository;
-import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import static yte.ypbs.ypbs_2024_ge3.user.mapper.KurumsalProjeMapper.toKurumsalProjeEntity;
 
 @Service
-public class ProjeService{
-    private ProjeRepository projeRepository;
+public class ProjeService {
 
-    public ProjeService(ProjeRepository projeRepository) {
-        this.projeRepository = projeRepository;
-    }
+  private final UserService userService;
+  private final ProjeRepository projeRepository;
+  private final KurumsalProjeRepository kurumsalProjeRepository;
 
-    public List<String> findProjectNames() {
-        return projeRepository.findDistinctAndSortedProjectNames();
-    }
+  public ProjeService(UserService userService, ProjeRepository projeRepository, KurumsalProjeRepository kurumsalProjeRepository) {
+    this.userService = userService;
+    this.projeRepository = projeRepository;
+    this.kurumsalProjeRepository = kurumsalProjeRepository;
+  }
 
-    public List<String> findTeams() {
-        return projeRepository.findDistinctAndSortedTeams();
-    }
+  public List<String> findProjectNames() {
+    return projeRepository.findDistinctAndSortedProjectNames();
+  }
+
+  public List<String> findTeams() {
+    return projeRepository.findDistinctAndSortedTeams();
+  }
+
+  @Transactional
+  public List<UsersProjeResponse> getUserProje() { //Returns Users enrolled project details
+    return Optional.ofNullable(userService.getUser().getKurumsal())
+      .map(kurumsal -> kurumsal.getKurumsalProjeler().stream()
+        .map(KurumsalProjeMapper::toUsersProjeResponse).toList())
+      .orElse(Collections.emptyList());
+  }
+
+  @Transactional
+  public void updateUserProje(Long id, UsersProjeRequest projeRequest) { //Right now this modify's project details thorugh user it should be changed after discuss
+    KurumsalProje kurumsalProje = kurumsalProjeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    toKurumsalProjeEntity(kurumsalProje, projeRequest);
+    kurumsalProjeRepository.save(kurumsalProje);
+  }
+
+  @Transactional
+  public void deleteUserProje(Long id) { //Only removes the user from project doesnt delete project just cuts the connections between user
+    userService.getUser().getKurumsal().getKurumsalProjeler().remove(
+      kurumsalProjeRepository.findById(id).orElseThrow(EntityNotFoundException::new)
+    );
+    kurumsalProjeRepository.deleteById(id);
+  }
+
+  @Transactional
+  public void addUserProje(UsersProjeRequest projeRequest) { // This should add user to an existing projects it should also take the project id however Project creating is not done so empty
+//        Proje proje = toNewProje(projeRequest);
+//        projeRepository.save(proje);
+//        userService.getUser().getKurumsal().getProjects().add(proje);
+  }
 }
-

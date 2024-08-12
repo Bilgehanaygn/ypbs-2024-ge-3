@@ -23,11 +23,12 @@ public class Deneyim extends BaseEntity {
     private LocalDate bitisTarihi;
     private String istenAyrilmaNedeni;
 
-    public Deneyim(String sirket, String pozisyon, LocalDate baslamaTarihi, LocalDate bitisTarihi ) {
-        this.kurumAdi = sirket;
+    public Deneyim(String kurumAdi, String pozisyon, CalismaSekli calismaSekli, LocalDate baslamaTarihi, LocalDate bitisTarihi, String istenAyrilmaNedeni) {
+        this.kurumAdi = kurumAdi;
         this.pozisyon = pozisyon;
+        this.calismaSekli = calismaSekli;
         this.baslamaTarihi = baslamaTarihi;
         this.bitisTarihi = bitisTarihi;
-
+        this.istenAyrilmaNedeni = istenAyrilmaNedeni;
     }
 }

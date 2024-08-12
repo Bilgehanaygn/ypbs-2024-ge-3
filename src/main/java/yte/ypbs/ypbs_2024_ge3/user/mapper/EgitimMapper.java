@@ -3,7 +3,7 @@ package yte.ypbs.ypbs_2024_ge3.user.mapper;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Egitim;
 import yte.ypbs.ypbs_2024_ge3.user.enums.EgitimTuru;
 import yte.ypbs.ypbs_2024_ge3.user.controller.request.EgitimRequest;
-import yte.ypbs.ypbs_2024_ge3.user.controller.response.EgitimResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersEgitimResponse;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,8 +18,8 @@ public class EgitimMapper {
         egitim.setAciklama(egitimRequest.aciklama());
     }
 
-    public static EgitimResponse toEgitimResponse(Egitim egitim) {
-        return new EgitimResponse(
+    public static UsersEgitimResponse toUsersEgitimResponse(Egitim egitim) {
+        return new UsersEgitimResponse(
                 egitim.getId(),
                 egitim.getEgitimTuru().toString(),
                 egitim.getOkulAdi(),

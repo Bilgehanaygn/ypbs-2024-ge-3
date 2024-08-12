@@ -1,4 +1,4 @@
-package yte.ypbs.ypbs_2024_ge3.login.configuration;
+package yte.ypbs.ypbs_2024_ge3.common.populator;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
