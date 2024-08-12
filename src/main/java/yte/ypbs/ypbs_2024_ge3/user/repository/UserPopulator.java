@@ -44,9 +44,9 @@ public class UserPopulator {
 
         organizationPopulator.populate();
 
-        Proje mgm = new Proje("MGM", "Team A", LocalDate.of(2020, 2,2), LocalDate.of(2020, 2,2));
-        Proje eTedarik = new Proje("E-Tedarik", "Team B", LocalDate.of(2020, 2,2), LocalDate.of(2020, 2,2));
-        Proje pybs = new Proje("PYBS", "Team C", LocalDate.of(2020, 2,2), LocalDate.of(2020, 2,2));
+        Proje mgm = new Proje("MGM", "Team A");
+        Proje eTedarik = new Proje("E-Tedarik", "Team B");
+        Proje pybs = new Proje("PYBS", "Team C");
         projeRepository.saveAll(List.of(mgm, eTedarik, pybs));
 
         User cemre = new User("Cemre",
