@@ -33,15 +33,15 @@ public class TempDatabasePopulate {
                 new Egitim(ILKOKUL, "lise", "a", LocalDate.of(2020,12,2), LocalDate.of(2020,12,2),"okulum"),
                 new Egitim(LISANS, "uni", "tarak", LocalDate.of(2020,12,2), LocalDate.of(2020,12,2), "merahabaşlar uzun text denemsi sacma seyler yazıom")),
                 "a", "a", "user", passwordEncoder.encode("123"), "a@a.com", "a", List.of(new Authority("ROLE_USER")));
-
+        user.setDogumTarihi(LocalDate.of(2020, 8,12));
 
         User admin = new User (
                 Set.of(
                         new Egitim(LISE, "de", "sgjsjgsfj", LocalDate.of(2020, 12, 2), LocalDate.of(2020, 12, 2), "sdgsdg"),
                         new Egitim(ILKOKUL, "de", "fafaf", LocalDate.of(2020,12,2), LocalDate.of(2020,12,2),"gasdgsd"),
-                        new Egitim(LISANS, "asfadsfdaf", "adgadgad", LocalDate.of(2020,12,2), LocalDate.of(2020,12,2),"gasdgsd")),
+                        new Egitim(LISANS, "asfadsfdaf", "adgadgad", LocalDate.of(2020,8,11), LocalDate.of(2020,8,6),"gasdgsd")),
                 "as", "ae", "admin", passwordEncoder.encode("123"), "a@a.com", "a", List.of(new Authority("ROLE_ADMIN")));
-
+        admin.setDogumTarihi(LocalDate.of(2020, 8,11));
         userRepository.saveAll(List.of(user, admin));
     }
 }

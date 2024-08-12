@@ -31,12 +31,12 @@ public class EgitimService {
     //Returns the Authenticated User's egitim
     public List<EgitimResponse> getUserEgitim() {
 
-        Set<Egitim> egitimSet = userService.getUser().getEgitim();
+        Set<Egitim> egitimSet = userService.getLoggedInUser().getEgitim();
         return egitimSet.stream().map(EgitimMapper::toEgitimResponse).toList();
     }
 
     public Set<Egitim> getUserEgitim(String username) {
-        return userService.getUser(username).getEgitim();
+        return userService.getLoggedInUser(username).getEgitim();
     }
 
     public List<String> getEgitimEnums(){
@@ -55,7 +55,7 @@ public class EgitimService {
     @Transactional
     public void deleteUserEgitim(Long id) {
 
-        userService.getUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
+        userService.getLoggedInUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
         egitimRepository.delete(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
     }
 
@@ -63,6 +63,6 @@ public class EgitimService {
     public void addUserEgitim(EgitimRequest egitimRequests) {
         Egitim newEgitim = toNewEgitim(egitimRequests);
         egitimRepository.save(newEgitim);
-        userService.getUser().addEgitim(newEgitim);
+        userService.getLoggedInUser().addEgitim(newEgitim);
     }
 }

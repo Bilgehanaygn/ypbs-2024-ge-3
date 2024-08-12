@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
+import yte.ypbs.ypbs_2024_ge3.image.entity.Image;
 import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Plaka;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
@@ -69,7 +70,11 @@ public class User extends BaseEntity implements UserDetails {
 
     private LocalDate dogumTarihi;
 
-    private byte[] photo;
+    private int dogumTarihiAyDegeri;
+
+    @OneToOne
+    @JoinColumn(name = "photo_id")
+    private Image photo;  // Add this field to link the user's profile photo
 
     @Enumerated(EnumType.STRING)
     private KanGrubu kanGrubu;
@@ -111,10 +116,6 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Dosya> dosyalar = new HashSet<>();
 
-    @Lob
-    @Column(name = "image", columnDefinition="BLOB")
-    private byte[] image;
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Kurumsal kurumsal;
 
@@ -128,10 +129,10 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities = authorities;
         this.telefon = telefon;
         this.egitim = egitim;
+
     }
 
-
-    public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi, byte[] image) {
+    public User(String isim, String soyisim, String username, String password, String email, String telefon, LocalDate dogumTarihi) {
         this.isim = isim;
         this.soyisim = soyisim;
         this.username = username;
@@ -139,7 +140,7 @@ public class User extends BaseEntity implements UserDetails {
         this.email = email;
         this.telefon = telefon;
         this.dogumTarihi = dogumTarihi;
-        this.image = image;
+        this.dogumTarihiAyDegeri=dogumTarihi.getMonthValue();
     }
 
 
@@ -178,6 +179,12 @@ public class User extends BaseEntity implements UserDetails {
         return enabled;
     }
 
+
+    public void setDogumTarihi(LocalDate date){
+        this.dogumTarihi = date;
+        this.dogumTarihiAyDegeri=date.getMonthValue();
+    }
+
     public void addEgitim(Egitim egitim1){
         egitim.add(egitim1);
     }
@@ -208,7 +215,9 @@ public class User extends BaseEntity implements UserDetails {
 
 
 
-    public UserHeaderResponse toUserHeaderResponse(){
-        return new UserHeaderResponse(isim, soyisim, photo);
+    public UserHeaderResponse toUserHeaderResponse() {
+        byte[] photoData = (photo != null) ? photo.getData() : null;
+        return new UserHeaderResponse(isim, soyisim, photoData);
     }
+
 }

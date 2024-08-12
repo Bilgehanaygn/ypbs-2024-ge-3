@@ -39,7 +39,7 @@ public class UserPopulator {
         organizationPopulator.populate();
 
 
-        User user1 = new User("Cemre", "Çelik", "cemrecelik",passwordEncoder.encode("cemre"), "cemre.celik@tubitak.gov.tr", "065555555555", LocalDate.of(2020, 7, 24), null);
+        User user1 = new User("Cemre", "Çelik", "cemrecelik",passwordEncoder.encode("cemre"), "cemre.celik@tubitak.gov.tr", "065555555555" , LocalDate.of(2000,1,1));
 
         userRepository.save(user1);
 
