@@ -25,24 +25,12 @@ public class ProjeService{
         this.projeRepository = projeRepository;
     }
 
-    public List<String> findNames() {
-        return projeRepository.findAll()
-                .stream()
-                .map(Proje::getProjeAdi)
-                .collect(Collectors.toSet())
-                .stream()
-                .sorted()
-                .toList();
+    public List<String> findProjectNames() {
+        return projeRepository.findDistinctAndSortedProjectNames();
     }
 
     public List<String> findTeams() {
-        return projeRepository.findAll()
-                .stream()
-                .map(Proje::getTakim)
-                .collect(Collectors.toSet())
-                .stream()
-                .sorted()
-                .toList();
+        return projeRepository.findDistinctAndSortedTeams();
     }
 }
 

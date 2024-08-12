@@ -27,13 +27,7 @@ public class KurumsalProjeService {
     }
 
     public List<String> findGorevs() {
-        return kurumsalProjeRepository.findAll()
-                .stream()
-                .map(KurumsalProje::getGorev)
-                .collect(Collectors.toSet())
-                .stream()
-                .sorted()
-                .toList();
+        return kurumsalProjeRepository.findDistinctAndSortedGorevs();
     }
 
 }

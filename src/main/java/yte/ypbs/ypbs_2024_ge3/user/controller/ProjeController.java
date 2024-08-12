@@ -22,9 +22,9 @@ public class ProjeController {
         this.projeService = projeService;
     }
 
-    @GetMapping("/getNames")
+    @GetMapping("/getProjectNames")
     public List<String> getUnvans() {
-        return projeService.findNames();
+        return projeService.findProjectNames();
     }
 
     @GetMapping("/getTeams")

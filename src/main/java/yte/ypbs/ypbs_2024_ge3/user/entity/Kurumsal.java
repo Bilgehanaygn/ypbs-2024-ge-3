@@ -30,6 +30,7 @@ public class Kurumsal extends BaseEntity {
     private String unvan;
 
     @ManyToOne
+    @JoinColumn(name = "birim")
     private Organization birim;
 
     @OneToMany(mappedBy = "kurumsal", cascade = CascadeType.ALL, orphanRemoval = true)
