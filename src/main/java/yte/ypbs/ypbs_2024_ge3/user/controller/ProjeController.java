@@ -3,6 +3,9 @@ package yte.ypbs.ypbs_2024_ge3.user.controller;
 import org.springframework.web.bind.annotation.*;
 import yte.ypbs.ypbs_2024_ge3.user.controller.request.UsersProjeRequest;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersProjeResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import yte.ypbs.ypbs_2024_ge3.user.service.ProjeService;
 
 import java.util.List;
@@ -35,5 +38,16 @@ public class ProjeController {
     @DeleteMapping("/{id}")
     public void deleteUserProje(@PathVariable Long id) {
         projeService.deleteUserProje(id);
+    }
+
+
+    @GetMapping("/getProjectNames")
+    public List<String> getUnvans() {
+        return projeService.findProjectNames();
+    }
+
+    @GetMapping("/getTeams")
+    public List<String> getBirims() {
+        return projeService.findTeams();
     }
 }

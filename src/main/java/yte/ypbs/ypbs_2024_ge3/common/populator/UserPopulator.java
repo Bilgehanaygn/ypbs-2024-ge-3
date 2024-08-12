@@ -47,9 +47,9 @@ public class UserPopulator {
 
         organizationPopulator.populate();
 
-        Proje mgm = new Proje("MGM", "Team A", LocalDate.of(2020, 2,2), LocalDate.of(2020, 2,2));
-        Proje eTedarik = new Proje("E-Tedarik", "Team B", LocalDate.of(2020, 2,2), LocalDate.of(2020, 2,2));
-        Proje pybs = new Proje("PYBS", "Team C", LocalDate.of(2020, 2,2), LocalDate.of(2020, 2,2));
+        Proje mgm = new Proje("MGM", "Team A", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje eTedarik = new Proje("E-Tedarik", "Team B", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje pybs = new Proje("PYBS", "Team C", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
         projeRepository.saveAll(List.of(mgm, eTedarik, pybs));
 
         User cemre = new User("Cemre",
@@ -86,11 +86,11 @@ public class UserPopulator {
         KurumsalProje kurumsalProje4 = new KurumsalProje(kurumsalSerkan,pybs, "Full-Stack Developer");
         kurumsalProjeRepository.saveAll(List.of(kurumsalProje1, kurumsalProje2, kurumsalProje3, kurumsalProje4));
 
-        Proje project1 = new Proje("CRM System", "Team A");
-        Proje project2 = new Proje("HR Management", "Team B");
-        Proje project3 = new Proje("Supply Chain", "Team C");
-        Proje project4 = new Proje("E-Commerce Platform", "Team A");
-        Proje project5 = new Proje("Data Analytics", "Team D");
+        Proje project1 = new Proje("CRM System", "Team A", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project2 = new Proje("HR Management", "Team B", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project3 = new Proje("Supply Chain", "Team C", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project4 = new Proje("E-Commerce Platform", "Team A", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
+        Proje project5 = new Proje("Data Analytics", "Team D", LocalDate.of(1990, 5, 15), LocalDate.of(1990, 5, 15));
 
 // Saving additional Proje instances
         projeRepository.saveAll(List.of(project1, project2, project3, project4, project5));

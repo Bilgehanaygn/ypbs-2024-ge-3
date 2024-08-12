@@ -4,7 +4,10 @@ package yte.ypbs.ypbs_2024_ge3.user.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
 import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
@@ -13,6 +16,8 @@ import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
+import yte.ypbs.ypbs_2024_ge3.user.response.GorevVeProje;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserDataResponse;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
 
 
@@ -20,6 +25,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -27,7 +33,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "_user")
-@ToString
 public class User extends BaseEntity implements UserDetails {
 
     @NotBlank
@@ -115,11 +120,8 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "image", columnDefinition="BLOB")
     private byte[] image;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Kurumsal kurumsal;
 
-
-    public User(Set<Egitim> egitim, String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
+    public User(String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
         this.soyisim = soyisim;
         this.username = username;
@@ -127,7 +129,6 @@ public class User extends BaseEntity implements UserDetails {
         this.email = email;
         this.authorities = authorities;
         this.telefon = telefon;
-        this.egitim = egitim;
     }
 
 
@@ -143,6 +144,19 @@ public class User extends BaseEntity implements UserDetails {
         this.dosyalar=dosyalar;
     }
 
+    public User(Set<Egitim> egitim, String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+        this.telefon = telefon;
+        this.egitim = egitim;
+    }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Kurumsal kurumsal;
 
     @Override
     public List<Authority> getAuthorities() {
@@ -208,6 +222,21 @@ public class User extends BaseEntity implements UserDetails {
     }
 
 
+    public UserDataResponse toUserDataResponse() {
+        return new UserDataResponse(
+                (isim + " " + soyisim),
+                this.getKurumsal().getBirim().getName(),
+                this.getKurumsal().getUnvan(),
+                this.getKurumsal().getKurumsalProjeler().stream().map(
+                        kurumsalProje -> new GorevVeProje(
+                                kurumsalProje.getGorev(),
+                                kurumsalProje.getProje().getProjeAdi()
+                        )
+                ).collect(Collectors.toList()),
+                email,
+                telefon
+        );
+    }
 
     public UserHeaderResponse toUserHeaderResponse(){
         return new UserHeaderResponse(isim, soyisim, photo);

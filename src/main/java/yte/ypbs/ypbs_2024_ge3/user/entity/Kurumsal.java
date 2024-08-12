@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import yte.ypbs.ypbs_2024_ge3.Organization.Organization;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
+import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
 import yte.ypbs.ypbs_2024_ge3.user.enums.CalismaDurumu;
 import yte.ypbs.ypbs_2024_ge3.user.enums.CalismaTuru;
 import yte.ypbs.ypbs_2024_ge3.user.enums.PersonelTuru;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class Kurumsal extends BaseEntity {
     private String unvan;
 
     @ManyToOne
+    @JoinColumn(name = "birim")
     private Organization birim;
 
     @OneToMany(mappedBy = "kurumsal", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,6 +44,7 @@ public class Kurumsal extends BaseEntity {
     private String dahiliNumara;
     private Integer odaNumara;
 
+
     public Kurumsal(User user, String unvan, Organization birim, List<KurumsalProje> kurumsalProjeler) {
         this.user = user;
         this.unvan = unvan;
@@ -48,3 +52,4 @@ public class Kurumsal extends BaseEntity {
         this.kurumsalProjeler = kurumsalProjeler;
     }
 }
+

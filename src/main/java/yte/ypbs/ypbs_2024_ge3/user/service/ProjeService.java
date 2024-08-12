@@ -6,20 +6,16 @@ import org.springframework.transaction.annotation.Transactional;
 import yte.ypbs.ypbs_2024_ge3.user.controller.request.UsersProjeRequest;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersProjeResponse;
 import yte.ypbs.ypbs_2024_ge3.user.entity.KurumsalProje;
-import yte.ypbs.ypbs_2024_ge3.user.entity.Proje;
 import yte.ypbs.ypbs_2024_ge3.user.mapper.KurumsalProjeMapper;
-import yte.ypbs.ypbs_2024_ge3.user.mapper.ProjeMapper;
 import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalProjeRepository;
 import yte.ypbs.ypbs_2024_ge3.user.repository.ProjeRepository;
 
 import java.util.List;
 
 import static yte.ypbs.ypbs_2024_ge3.user.mapper.KurumsalProjeMapper.toKurumsalProjeEntity;
-import static yte.ypbs.ypbs_2024_ge3.user.mapper.ProjeMapper.toNewProje;
-import static yte.ypbs.ypbs_2024_ge3.user.mapper.ProjeMapper.toProjeEntity;
 
 @Service
-public class ProjeService {
+public class ProjeService{
 
     private final UserService userService;
     private final ProjeRepository projeRepository;
@@ -29,6 +25,14 @@ public class ProjeService {
         this.userService = userService;
         this.projeRepository = projeRepository;
         this.kurumsalProjeRepository = kurumsalProjeRepository;
+    }
+
+    public List<String> findProjectNames() {
+        return projeRepository.findDistinctAndSortedProjectNames();
+    }
+
+    public List<String> findTeams() {
+        return projeRepository.findDistinctAndSortedTeams();
     }
 
     public List<UsersProjeResponse> getUserProje() { //Returns Users enrolled project details
