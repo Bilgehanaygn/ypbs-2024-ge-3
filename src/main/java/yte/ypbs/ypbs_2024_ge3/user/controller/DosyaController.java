@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/dosya")
 public class DosyaController {
 
     private final DosyaService dosyaService;
@@ -22,17 +22,17 @@ public class DosyaController {
     }
 
 
-    @GetMapping("/dosya")
+    @GetMapping()
     public List<UsersDosyaDetailResponse> getUserDosya() {
         return dosyaService.getUserDosyaDetails();
     }
 
-    @GetMapping("/dosya/enum")
+    @GetMapping("/enum")
     public List<String> getDosyaEnum() {
         return dosyaService.getDosyaEnums();
     }
 
-    @GetMapping("/dosya/download/{id}")
+    @GetMapping("/download/{id}")
     public void downloadUserDosya(@PathVariable Long id, HttpServletResponse response) throws IOException {
 
 //        return dosyaService.getUserDosyaFile(id).dosya(); // return type'ı byte[] yapıp kullanaılabilir
@@ -50,7 +50,7 @@ public class DosyaController {
         }
     }
 
-    @PostMapping(value = "/dosya/upload",
+    @PostMapping(value = "/upload",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public String uploadUserDosya(@ModelAttribute UsersDosyaRequest usersDosyaRequest) {
@@ -62,7 +62,7 @@ public class DosyaController {
         }
     }
 
-    @DeleteMapping("/dosya/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserDosya(@PathVariable Long id) {
         dosyaService.deleteUserDosya(id);
     }

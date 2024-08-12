@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/katki")
 public class KatkiController {
 
     private final KatkiService katkiService;
@@ -21,21 +21,18 @@ public class KatkiController {
         this.katkiService = katkiService;
     }
 
-    @GetMapping("/katki")
+    @GetMapping()
     public List<UsersKatkiDetailResponse> getKatki() {
         return katkiService.getUserKatkiDetails();
     }
 
-    @GetMapping("katki/enum")
+    @GetMapping("/enum")
     public List<String> getKatkiEnum() {
         return katkiService.getKatkiEnums();
     }
 
-    @GetMapping("/katki/download/{id}")
+    @GetMapping("/download/{id}")
     public void downloadUserKatki(@PathVariable Long id, HttpServletResponse response) throws IOException {
-
-//        return katkiService.getUserKatkiFile(id).ek(); //Change Retrun type
-
         try {
             UsersKatkiFileResponse fileResponse = katkiService.getUserKatkiFile(id);
 
@@ -49,7 +46,7 @@ public class KatkiController {
 
     }
 
-    @PostMapping(value = "/katki/upload",
+    @PostMapping(value = "/upload",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public void uploadUserKatki(@ModelAttribute UsersKatkiRequest katkiRequest) {
@@ -60,14 +57,14 @@ public class KatkiController {
         }
     }
 
-    @PutMapping(value = "/katki/upload/{id}",
+    @PutMapping(value = "/upload/{id}",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public void updateUserKatki(@PathVariable Long id, @ModelAttribute UsersKatkiRequest katkiRequest) {
         katkiService.updateUserKatki(id, katkiRequest);
     }
 
-    @DeleteMapping("/katki/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserKatki(@PathVariable Long id) {
         katkiService.deleteUserKatki(id);
     }

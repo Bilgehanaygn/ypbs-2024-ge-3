@@ -8,7 +8,7 @@ import yte.ypbs.ypbs_2024_ge3.user.service.ProjeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/proje")
 public class ProjeController {
 
     private final ProjeService projeService;
@@ -17,24 +17,23 @@ public class ProjeController {
         this.projeService = projeService;
     }
 
-    @GetMapping("/proje")
+    @GetMapping()
     public List<UsersProjeResponse> getUserProje() {
         return projeService.getUserProje();
     }
 
-    @PostMapping("/proje")
+    @PostMapping()
     public void addUserProje(@RequestBody UsersProjeRequest projeRequest) {
         projeService.addUserProje(projeRequest);
     }
 
-    @PutMapping("/proje/{id}")
+    @PutMapping("/{id}")
     public void updateUserProje(@PathVariable Long id, @RequestBody UsersProjeRequest projeRequest) {
         projeService.updateUserProje(id, projeRequest);
     }
 
-    @DeleteMapping("/proje/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserProje(@PathVariable Long id) {
         projeService.deleteUserProje(id);
     }
-
 }
