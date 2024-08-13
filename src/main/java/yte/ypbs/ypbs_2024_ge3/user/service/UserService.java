@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserDataResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -24,7 +30,17 @@ public class UserService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return user.toUserHeaderResponse();
     }
-
+    public List<UserDataResponse> findUsersWithFilters(String nameSurname,
+                                                       String unvan,
+                                                       String gorev,
+                                                       String birim,
+                                                       String proje,
+                                                       String takim) {
+        List<User> result = userRepository.findUsersWithFilters(nameSurname, birim, unvan, gorev, proje, takim);
+        return result.stream()
+                .map(User::toUserDataResponse)
+                .collect(Collectors.toList());
+    }
 
     public User getLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
