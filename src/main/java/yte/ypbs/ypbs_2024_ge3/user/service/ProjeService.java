@@ -39,7 +39,7 @@ public class ProjeService {
 
   @Transactional
   public List<UsersProjeResponse> getUserProje() { //Returns Users enrolled project details
-    return Optional.ofNullable(userService.getUser().getKurumsal())
+    return Optional.ofNullable(userService.getLoggedInUser().getKurumsal())
       .map(kurumsal -> kurumsal.getKurumsalProjeler().stream()
         .map(KurumsalProjeMapper::toUsersProjeResponse).toList())
       .orElse(Collections.emptyList());
@@ -54,7 +54,7 @@ public class ProjeService {
 
   @Transactional
   public void deleteUserProje(Long id) { //Only removes the user from project doesnt delete project just cuts the connections between user
-    userService.getUser().getKurumsal().getKurumsalProjeler().remove(
+    userService.getLoggedInUser().getKurumsal().getKurumsalProjeler().remove(
       kurumsalProjeRepository.findById(id).orElseThrow(EntityNotFoundException::new)
     );
     kurumsalProjeRepository.deleteById(id);

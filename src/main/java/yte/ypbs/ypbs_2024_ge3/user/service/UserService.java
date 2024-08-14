@@ -30,8 +30,6 @@ public class UserService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return user.toUserHeaderResponse();
     }
-
-
     public List<UserDataResponse> findUsersWithFilters(String nameSurname,
                                                        String unvan,
                                                        String gorev,
@@ -44,16 +42,14 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-
-    public User getUser() {
+    public User getLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return user;
     }
 
-    public User getUser(String username) {
+    public User getLoggedInUser(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return user;
     }

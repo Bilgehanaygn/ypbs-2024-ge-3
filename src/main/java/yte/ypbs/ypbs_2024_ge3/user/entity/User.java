@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 import yte.ypbs.ypbs_2024_ge3.common.entity.BaseEntity;
+import yte.ypbs.ypbs_2024_ge3.image.entity.Image;
 import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Plaka;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
-import yte.ypbs.ypbs_2024_ge3.user.response.GorevVeProje;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.GorevVeProje;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserDataResponse;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
 
@@ -74,7 +75,11 @@ public class User extends BaseEntity implements UserDetails {
 
     private LocalDate dogumTarihi;
 
-    private byte[] photo;
+    private int dogumTarihiAyDegeri;
+
+    @OneToOne
+    @JoinColumn(name = "photo_id")
+    private Image photo;  // Add this field to link the user's profile photo
 
     @Enumerated(EnumType.STRING)
     private KanGrubu kanGrubu;
@@ -116,10 +121,8 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Dosya> dosyalar = new HashSet<>();
 
-    @Lob
-    @Column(name = "image", columnDefinition="BLOB")
-    private byte[] image;
-
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Kurumsal kurumsal;
 
     public User(String isim, String soyisim, String username, String password, String email, String telefon, List<Authority> authorities) {
         this.isim = isim;
@@ -140,7 +143,7 @@ public class User extends BaseEntity implements UserDetails {
         this.email = email;
         this.telefon = telefon;
         this.dogumTarihi = dogumTarihi;
-        this.image = image;
+        this.dogumTarihiAyDegeri=dogumTarihi.getMonthValue();
         this.dosyalar=dosyalar;
     }
 
@@ -155,8 +158,6 @@ public class User extends BaseEntity implements UserDetails {
         this.egitim = egitim;
     }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Kurumsal kurumsal;
 
     @Override
     public List<Authority> getAuthorities() {
@@ -191,6 +192,12 @@ public class User extends BaseEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+
+    public void setDogumTarihi(LocalDate date){
+        this.dogumTarihi = date;
+        this.dogumTarihiAyDegeri=date.getMonthValue();
     }
 
     public void addEgitim(Egitim egitim1){
@@ -238,7 +245,8 @@ public class User extends BaseEntity implements UserDetails {
         );
     }
 
-    public UserHeaderResponse toUserHeaderResponse(){
-        return new UserHeaderResponse(isim, soyisim, photo);
+    public UserHeaderResponse toUserHeaderResponse() {
+        byte[] photoData = (photo != null) ? photo.getData() : null;
+        return new UserHeaderResponse(isim, soyisim, photoData);
     }
 }

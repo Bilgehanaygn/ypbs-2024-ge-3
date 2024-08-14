@@ -3,6 +3,7 @@ package yte.ypbs.ypbs_2024_ge3.user.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UsersEgitimResponse;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Egitim;
 import yte.ypbs.ypbs_2024_ge3.user.enums.EgitimTuru;
 import yte.ypbs.ypbs_2024_ge3.user.mapper.EgitimMapper;
@@ -31,12 +32,12 @@ public class EgitimService {
     //Returns the Authenticated User's egitim
     public List<UsersEgitimResponse> getUserEgitim() {
 
-        Set<Egitim> egitimSet = userService.getUser().getEgitim();
+        Set<Egitim> egitimSet = userService.getLoggedInUser().getEgitim();
         return egitimSet.stream().map(EgitimMapper::toUsersEgitimResponse).toList();
     }
 
     public Set<Egitim> getUserEgitim(String username) {
-        return userService.getUser(username).getEgitim();
+        return userService.getLoggedInUser(username).getEgitim();
     }
 
     public List<String> getEgitimEnums() {
@@ -55,7 +56,7 @@ public class EgitimService {
     @Transactional
     public void deleteUserEgitim(Long id) {
 
-        userService.getUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
+        userService.getLoggedInUser().removeEgitim(egitimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Egitim not found with id: " + id)));
         egitimRepository.deleteById(id);
     }
 
@@ -63,6 +64,6 @@ public class EgitimService {
     public void addUserEgitim(EgitimRequest egitimRequests) {
         Egitim newEgitim = toNewEgitim(egitimRequests);
         egitimRepository.save(newEgitim);
-        userService.getUser().addEgitim(newEgitim);
+        userService.getLoggedInUser().addEgitim(newEgitim);
     }
 }

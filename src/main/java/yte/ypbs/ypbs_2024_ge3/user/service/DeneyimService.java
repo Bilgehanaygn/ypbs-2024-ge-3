@@ -29,7 +29,7 @@ public class DeneyimService {
     }
 
     public List<UsersDeneyimResponse> getUserDeneyim(){
-        Set<Deneyim> deneyimSet = userService.getUser().getDeneyimler();
+        Set<Deneyim> deneyimSet = userService.getLoggedInUser().getDeneyimler();
         return deneyimSet.stream().map(DeneyimMapper::toUsersDeneyimResponse).toList();
     }
 
@@ -46,7 +46,7 @@ public class DeneyimService {
 
     @Transactional
     public void deleteUserDeneyim(Long id){
-        userService.getUser().removeDeneyim(deneyimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Deneyim not found")));
+        userService.getLoggedInUser().removeDeneyim(deneyimRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Deneyim not found")));
         deneyimRepository.deleteById(id);
     }
 
@@ -54,6 +54,6 @@ public class DeneyimService {
     public void addUserDeneyim(UsersDeneyimRequest deneyimRequest){
         Deneyim newDeneyim = toNewDeneyim(deneyimRequest);
         deneyimRepository.save(newDeneyim);
-        userService.getUser().addDeneyim(newDeneyim);
+        userService.getLoggedInUser().addDeneyim(newDeneyim);
     }
 }

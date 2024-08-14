@@ -30,7 +30,7 @@ public class KatkiService {
     }
 
     public List<UsersKatkiDetailResponse> getUserKatkiDetails() {
-        Set<Katki> katkiSet = userService.getUser().getKatkilar();
+        Set<Katki> katkiSet = userService.getLoggedInUser().getKatkilar();
         return katkiSet.stream().map(KatkiMapper::toUsersKatkiDetailResponse).toList();
     }
 
@@ -57,7 +57,7 @@ public class KatkiService {
 
     @Transactional
     public void deleteUserKatki(Long id) {
-        userService.getUser().removeKatki(katkiRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Katki not found")));
+        userService.getLoggedInUser().removeKatki(katkiRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Katki not found")));
         katkiRepository.deleteById(id);
     }
 
@@ -65,7 +65,7 @@ public class KatkiService {
     public void addUserKatki(UsersKatkiRequest katkiRequest) throws IOException {
         Katki katki = toNewKatki(katkiRequest);
         katkiRepository.save(katki);
-        userService.getUser().addKatki(katki);
+        userService.getLoggedInUser().addKatki(katki);
     }
 
 }

@@ -31,7 +31,7 @@ public class DosyaService {
     }
 
     public List<UsersDosyaDetailResponse> getUserDosyaDetails() {
-        Set<Dosya> dosyaSet = userService.getUser().getDosyalar();
+        Set<Dosya> dosyaSet = userService.getLoggedInUser().getDosyalar();
         return dosyaSet.stream().map(DosyaMapper::toUsersDosyaDetailResponse).toList();
     }
 
@@ -46,7 +46,7 @@ public class DosyaService {
 
     @Transactional
     public void deleteUserDosya(Long id){
-        userService.getUser().removeDosya(dosyaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Dosyal Not Found")));
+        userService.getLoggedInUser().removeDosya(dosyaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Dosyal Not Found")));
         dosyaRepository.deleteById(id);
     }
 
@@ -54,6 +54,6 @@ public class DosyaService {
     public void storeUserDosya(UsersDosyaRequest usersDosyaRequest) throws IOException {
         Dosya newDosya = toNewDosya(usersDosyaRequest);
         dosyaRepository.save(newDosya);
-        userService.getUser().addDosya(newDosya);
+        userService.getLoggedInUser().addDosya(newDosya);
     }
 }
