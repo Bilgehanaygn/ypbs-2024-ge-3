@@ -247,6 +247,6 @@ public class User extends BaseEntity implements UserDetails {
 
     public UserHeaderResponse toUserHeaderResponse() {
         byte[] photoData = (photo != null) ? photo.getData() : null;
-        return new UserHeaderResponse(isim, soyisim, photoData);
+        return new UserHeaderResponse(id, isim, soyisim, photoData);
     }
 }
