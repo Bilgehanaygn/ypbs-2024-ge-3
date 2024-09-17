@@ -231,6 +231,7 @@ public class User extends BaseEntity implements UserDetails {
 
     public UserDataResponse toUserDataResponse() {
         return new UserDataResponse(
+                id,
                 (isim + " " + soyisim),
                 this.getKurumsal().getBirim().getName(),
                 this.getKurumsal().getUnvan(),
