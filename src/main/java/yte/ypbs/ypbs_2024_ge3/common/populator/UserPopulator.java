@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import yte.ypbs.ypbs_2024_ge3.Organization.OrganizationRepository;
+import yte.ypbs.ypbs_2024_ge3.image.entity.Image;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Kurumsal;
 import yte.ypbs.ypbs_2024_ge3.user.entity.KurumsalProje;
 import yte.ypbs.ypbs_2024_ge3.user.entity.Proje;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
+import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
+import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
 import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalProjeRepository;
 import yte.ypbs.ypbs_2024_ge3.user.repository.KurumsalRepository;
 import yte.ypbs.ypbs_2024_ge3.user.repository.ProjeRepository;
@@ -116,13 +119,25 @@ public class UserPopulator {
                 "charlie.brown@company.com",
                 "05466677889", LocalDate.of(1998, 11, 10),
                 null, Set.of());
-        User diana = new User("Diana",
-                "Prince",
-                "diana.prince",
-                passwordEncoder.encode("wonderWoman"),
-                "diana.prince@company.com",
-                "05333344455", LocalDate.of(1989, 3, 8),
-                null, Set.of());
+
+        User diana = new User(
+            "Diana",
+            "Prince",
+            "diana.prince",
+            passwordEncoder.encode("wonderWoman"),
+            12345678910L,
+            Cinsiyet.KADIN,
+            "Aday Araştırmacı",
+            "diana.prince@company.com",
+            LocalDate.of(1989, 3, 8),
+            KanGrubu.A_NEGATIF,
+            "05333344455",
+            "06BJK132",
+            "Annesi",
+            "05333344456",
+            "Odtü Konukevi 1/1",
+            null
+        );
         User edward = new User("Edward",
                 "Kenway",
                 "edward.kenway",

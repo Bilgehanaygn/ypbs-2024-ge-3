@@ -15,6 +15,7 @@ import yte.ypbs.ypbs_2024_ge3.login.entity.Authority;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Plaka;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.TCKimlikNo;
 import yte.ypbs.ypbs_2024_ge3.user.annotation.Telefon;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserKisiselResponse;
 import yte.ypbs.ypbs_2024_ge3.user.enums.Cinsiyet;
 import yte.ypbs.ypbs_2024_ge3.user.enums.KanGrubu;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.GorevVeProje;
@@ -158,6 +159,25 @@ public class User extends BaseEntity implements UserDetails {
         this.egitim = egitim;
     }
 
+    public User(String isim, String soyisim,String username, String password, long tcKimlikNo, Cinsiyet cinsiyet, String akademikUnvan, String email, LocalDate dogumTarihi, KanGrubu kanGrubu, String telefon, String aracPlakasi, String acilDurumKisi, String acilDurumTelefon, String adres, Image image) {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.username = username;
+        this.password = password;
+        this.tcKimlikNo = tcKimlikNo;
+        this.cinsiyet = cinsiyet;
+        this.akademikUnvan = akademikUnvan;
+        this.email = email;
+        this.dogumTarihi = dogumTarihi;
+        this.kanGrubu = kanGrubu;
+        this.telefon = telefon;
+        this.aracPlakasi = aracPlakasi;
+        this.acilDurumKisi = acilDurumKisi;
+        this.acilDurumTelefon = acilDurumTelefon;
+        this.adres = adres;
+        this.photo = image;
+    }
+
 
     @Override
     public List<Authority> getAuthorities() {
@@ -249,5 +269,26 @@ public class User extends BaseEntity implements UserDetails {
     public UserHeaderResponse toUserHeaderResponse() {
         byte[] photoData = (photo != null) ? photo.getData() : null;
         return new UserHeaderResponse(id, isim, soyisim, photoData);
+    }
+
+    public UserKisiselResponse toUserKisiselResponse() {
+        byte[] photoData = (photo != null) ? photo.getData() : null;
+        return new UserKisiselResponse(
+                id,
+                isim,
+                soyisim,
+                tcKimlikNo,
+                cinsiyet,
+                akademikUnvan,
+                email,
+                dogumTarihi,
+                kanGrubu,
+                telefon,
+                aracPlakasi,
+                acilDurumKisi,
+                acilDurumTelefon,
+                adres,
+                null
+        );
     }
 }

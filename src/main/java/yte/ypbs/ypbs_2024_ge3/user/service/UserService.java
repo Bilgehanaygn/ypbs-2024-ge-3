@@ -5,14 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserKisiselResponse;
 import yte.ypbs.ypbs_2024_ge3.user.entity.User;
 import yte.ypbs.ypbs_2024_ge3.user.repository.UserRepository;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserHeaderResponse;
 import yte.ypbs.ypbs_2024_ge3.user.controller.response.UserDataResponse;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +29,12 @@ public class UserService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return user.toUserHeaderResponse();
     }
+
+    public UserKisiselResponse findByUsernameKisisel() {
+        User user = getLoggedInUser();
+        return user.toUserKisiselResponse();
+    }
+
     public List<UserDataResponse> findUsersWithFilters(String nameSurname,
                                                        String unvan,
                                                        String gorev,
